@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NANOO ARCHITECTURE</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: sans-serif; background: #fff; color: #111; overflow-x: hidden;}
+
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+    }
+    header img {
+      height: 40px;
+    }
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #111;
+      font-size: 1rem;
+    }
+
+    .project-list {
+      padding: 100px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .project-item {
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+    .project-item:hover {
+      transform: scale(1.01);
+    }
+    .project-item img {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .project-item h3 {
+      font-size: 1.2rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      z-index: 2000;
+    }
+    .lightbox img {
+      height: 90vh;
+      margin: 0 10px;
+    }
+    .lightbox .description {
+      color: #fff;
+      margin: 20px;
+      max-width: 800px;
+      font-size: 1rem;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    section.about, section.contact {
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    section.about h2, section.contact h2 {
+      margin-bottom: 0px;
+      font-size: 1.5rem;
+    }
+    section.about p, section.contact p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images\NANOO Architecture-Headshot Logo-Line Text.jpg" alt="Logo" />
+    <nav>
+      <a href="#">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="project-list">
+    <div class="project-item" onclick="openLightbox(0)">
+      <img src="https://source.unsplash.com/600x400/?building" alt="Project 1">
+      <h3>Lefei Hotel Renovation</h3>
+    </div>
+    <div class="project-item" onclick="openLightbox(1)">
+      <img src="https://source.unsplash.com/600x400/?architecture" alt="Project 2">
+      <h3>Qingfeng Road Primary School</h3>
+    </div>
+    <div class="project-item" onclick="openLightbox(2)">
+      <img src="https://source.unsplash.com/600x400/?skyscraper" alt="Project 3">
+      <h3>Wuxi Historical Building Interior Renovation</h3>
+
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About</h2>
+    <p>
+      At NANOO Architecture, we believe that even the smallest things hold boundless potential. Architecture is not only about building spaces—it is also an expression of ideas and emotions.   </p>
+  <p>
+
+      NANOO Architecture established its Shanghai studio in 2024 by Chuqi Xiao and Ran An. We offer integrated architectural and interior design services for a global clientele. Both partners bring years of experience from New York and Shanghai, with expertise spanning commercial, residential, hospitality, cultural, and office projects—both new construction and renovation.   </p>
+  <p>
+
+      With hands-on experience in project delivery, we ensure that every design is executed with precision, even under complex conditions. From concept to construction, we are committed to merging creativity with practicality—delivering projects that are both visionary and achievable. This is our pursuit—and our promise to every client.
+
+
+    </p>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>
+      Email: info@nanoo-architecture.com<br />
+      Address: 6th Floor, Tower C, Country Garden CenterNo. 613 Weinan Road, Yangpu District, Shanghai, China
+    </p>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <div id="lightbox-content"></div>
+    <div class="description" id="lightbox-description"></div>
+  </div>
+
+  <script>
+    const projects = [
+      {
+        images: [
+          'https://source.unsplash.com/1000x700/?building,1',
+          'https://source.unsplash.com/1000x700/?architecture,1',
+        ],
+        description: "Project 1 is a residential development emphasizing natural light and sustainable design."
+      },
+      {
+        images: [
+          'https://source.unsplash.com/1000x700/?city',
+          'https://source.unsplash.com/1000x700/?urban,1',
+        ],
+        description: "Project 2 is a mixed-use complex combining commercial, residential, and public spaces."
+      },
+      {
+        images: [
+          'https://source.unsplash.com/1000x700/?tower',
+          'https://source.unsplash.com/1000x700/?skyscraper,2',
+        ],
+        description: "Project 3 is a high-rise skyscraper with panoramic views and innovative structural solutions."
+      },
+      {
+        images: [
+          'https://source.unsplash.com/1000x700/?museum',
+          'https://source.unsplash.com/1000x700/?cultural',
+        ],
+        description: "Project 4 is a cultural center featuring performance venues and public plazas."
+      }
+    ];
+
+    function openLightbox(index) {
+      const lightbox = document.getElementById('lightbox');
+      const content = document.getElementById('lightbox-content');
+      const desc = document.getElementById('lightbox-description');
+      content.innerHTML = '';
+      projects[index].images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        content.appendChild(img);
+      });
+      desc.textContent = projects[index].description;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
