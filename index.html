@@ -56,30 +56,52 @@
     }
 
     .lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      z-index: 2000;
-    }
-    .lightbox img {
-      height: 90vh;
-      margin: 0 10px;
-    }
-    .lightbox .description {
-      color: #fff;
-      margin: 20px;
-      max-width: 800px;
-      font-size: 1rem;
-    }
-    .lightbox-close {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding: 20px;
+  white-space: nowrap;
+  z-index: 2000;
+  padding: 20px;
+  padding-bottom:120px;
+}
+
+.lightbox img {
+  max-height: 60vh;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  margin: 10px;
+  object-fit: contain;
+}
+
+.lightbox .description {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  z-index: 3000;
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-y: auto;
+  max-height: 30vh;
+}
+
+
+        .lightbox-close {
       position: absolute;
       top: 20px; right: 30px;
       color: white;
@@ -162,6 +184,7 @@
     const projects = [
       {
         images: [
+          'images/Leifei_Hotel/Scene 1.jpg',
           'images/Leifei_Hotel/Scene 2.jpg',
           'images/Leifei_Hotel/Scene 3.jpg',
         ],
@@ -189,7 +212,7 @@
           'images/Wuxi_Historical_Building_Interior_Renovation/Scene 10.jpg',
           'images/Wuxi_Historical_Building_Interior_Renovation/Scene 13.jpg',
         ],
-        description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area.On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core.The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life.Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster."
+        description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles."
       },
       {
         images: [
