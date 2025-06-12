@@ -156,6 +156,50 @@
     gap: 20px;
   }
 }
+.founders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.founder {
+  width: 250px;
+  text-align: center;
+}
+
+.founder img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.founder h3 {
+  margin: 10px 0 8px;
+  font-size: 1.2rem;
+}
+
+.founder p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* 响应式调整：手机端纵向排列 */
+@media (max-width: 600px) {
+  .founders {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .founder {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -197,6 +241,30 @@
 
 
     </p>
+    <div class="founders">
+  <div class="founder">
+    <img src="images/Chuqi-0.jpg" alt="Founder 1">
+    <h3>Chuqi Xiao</h3>
+    <p>Co-Founder | Lead Architect<br />
+       Class I Registered Architect in China <br />
+       US Registered Architect, AIA<br />
+       Bachelor of Architecture, Tianjin University<br />
+       Master of Architecture, Cornell University<br />
+      </p>
+  </div>
+  <div class="founder">
+    <img src="images/Ran-0.jpg" alt="Founder 2">
+    <h3>Ran An</h3>
+    <p>Co-Founder | Lead Architect<br />
+       US Registered Architect, AIA<br />
+       LEED GA<br />
+       Bachelor of Architecture, Tianjin University<br />
+       Master of Architecture, Columbia University<br />
+    </p>
+  </div>
+</div>
+
+
   </section>
 
   <section id="contact" class="contact">
