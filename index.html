@@ -59,7 +59,7 @@
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.95);
+  background: rgba(0, 0, 0, 0.95);
   display: none;
   flex-direction: column;
   z-index: 2000;
@@ -68,46 +68,56 @@
 
 .lightbox-scroll {
   height: 80vh;
-  display:flex;
-  align-items:flex-start;
+  display: flex;
+  align-items: flex-start;
   padding: 100px 20px 20px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+  cursor: grab;
+  user-select: none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.lightbox-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.lightbox-scroll.grabbing {
+  cursor: grabbing;
 }
 
 .lightbox-content {
-  height: 100%;             /* ✅ 新增 */
+  height: 100%;
+  display: flex;
+  gap: 10px;
 }
 
 .lightbox-content img {
-  height: 60vh;             /* 保留 */
+  height: 60vh;
   max-height: 60vh;
   width: auto;
   display: inline-block;
-  margin-right: 10px;
   object-fit: contain;
   user-select: none;
   pointer-events: none;
+  border-radius: 6px;
 }
 
+    .description {
+      height: 20vh;
+      width: 100%;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      padding: 15px 20px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
 
-/* 描述区只占下方 20% */
-.description {
-  height: 20vh;
-  width: 100%;
-  overflow-y: auto;
-  background: rgba(0, 0, 0, 0.9);
-  color: #fff;
-  padding: 15px 20px;
-  font-size: 1rem;
-  line-height: 1.5;
-  box-sizing: border-box;
-}
-
-
-
-        .lightbox-close {
+    .lightbox-close {
       position: fixed;
       top: 20px; right: 30px;
       color: white;
@@ -129,117 +139,100 @@
       line-height: 1.6;
       margin-bottom: 2em;
     }
+
+    .founders {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    .founder {
+      width: 250px;
+      text-align: center;
+    }
+
+    .founder img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .founder h3 {
+      margin: 10px 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .founder p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
     @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 15px;
-  }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+      }
 
-  nav {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 100%;
-    margin-top: 10px;
-  }
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        padding: 10px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
 
-  nav a {
-    font-size: 0.9rem;
-    margin: 5px 0;
-  }
+      nav a {
+        margin: 10px 0;
+        font-size: 1rem;
+      }
 
-  .project-item img {
-    width: 90%;
-    max-width: 300px;
-  }
+      nav.active {
+        display: flex;
+      }
 
-  .project-item h3 {
-    font-size: 1rem;
-  }
+      .hamburger {
+        display: block;
+      }
 
-  .project-list {
-    gap: 20px;
-  }
-}
-.founders {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-top: 40px;
-  justify-content: center;
-}
+      .project-item img {
+        width: 90%;
+        max-width: 300px;
+      }
 
-.founder {
-  width: 250px;
-  text-align: center;
-}
+      .project-item h3 {
+        font-size: 1rem;
+      }
 
-.founder img {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
+      .project-list {
+        gap: 20px;
+      }
 
-.founder h3 {
-  margin: 10px 0 8px;
-  font-size: 1.2rem;
-}
+      .founders {
+        flex-direction: column;
+        align-items: center;
+      }
 
-.founder p {
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-/* 响应式调整：手机端纵向排列 */
-@media (max-width: 600px) {
-  .founders {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .founder {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-/* 汉堡按钮样式 */
-.hamburger {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  margin-left:auto
-}
-
-/* 移动端菜单折叠样式 */
-@media (max-width: 768px) {
-  nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: white;
-    padding: 10px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-  }
-
-  nav a {
-    margin: 10px 0;
-    font-size: 1rem;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-  }
-}
+      .founder {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
 
   </style>
 </head>
@@ -333,68 +326,107 @@
 
 
   <script>
-    const projects = [
-      {
-        images: [
-          'images/Leifei_Hotel/1.webp',
-          'images/Leifei_Hotel/2.webp',
-          'images/Leifei_Hotel/3.webp',
-        ],
-        description: "This project is located in Waigaoqiao, Pudong District, Shanghai, near the historic Gaoqiao Old Town. The client commissioned the renovation of the four-story podium of the Lefei Tower into a hotel. The ground floor will feature the hotel lobby, restaurant, and bar, while the second to fourth floors will house guest rooms. The hotel is designed to serve business travelers in the Waigaoqiao Free Trade Zone, as well as tourists and family guests.In response to the local architectural context, the façade has been redesigned in a Shanghai-style Art Deco aesthetic. The design also incorporates new  smoke exhaust windows, balancing functional requirements with visual harmony. Great care has been taken to preserve as much of the original stone façade as possible, minimizing alterations while ensuring a cohesive and elegant appearance. The façade of the bar area at the southwest corner is designed with folding doors, which can be fully opened when needed to connect the indoor bar with the outdoor seating area. Together with the food truck across the street, it creates a lively mini commercial street within the site."
-      },
-      {
-        images: [
-          'images/Qingfeng_Road_Primary_School/1.webp',
-          'images/Qingfeng_Road_Primary_School/2.webp',
-          'images/Qingfeng_Road_Primary_School/3.webp',
-          'images/Qingfeng_Road_Primary_School/4.webp',
-          'images/Qingfeng_Road_Primary_School/5.webp',
-          'images/Qingfeng_Road_Primary_School/6.webp',
-          
-        ],
-        description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area.On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core.The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life.Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster."
-      },
-      {
-        images: [
-          'images/Wuxi_Historical_Building_Interior_Renovation/1.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/2.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/3.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/4.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/5.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
-          'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
-        ],
-        description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles."
-      },
-    ];
+  const projects = [
+    {
+      images: [
+        'images/Leifei_Hotel/1.webp',
+        'images/Leifei_Hotel/2.webp',
+        'images/Leifei_Hotel/3.webp',
+      ],
+      description: "This project is located in Waigaoqiao, Pudong District, Shanghai, near the historic Gaoqiao Old Town. The client commissioned the renovation of the four-story podium of the Lefei Tower into a hotel. The ground floor will feature the hotel lobby, restaurant, and bar, while the second to fourth floors will house guest rooms. The hotel is designed to serve business travelers in the Waigaoqiao Free Trade Zone, as well as tourists and family guests.In response to the local architectural context, the façade has been redesigned in a Shanghai-style Art Deco aesthetic. The design also incorporates new  smoke exhaust windows, balancing functional requirements with visual harmony. Great care has been taken to preserve as much of the original stone façade as possible, minimizing alterations while ensuring a cohesive and elegant appearance. The façade of the bar area at the southwest corner is designed with folding doors, which can be fully opened when needed to connect the indoor bar with the outdoor seating area. Together with the food truck across the street, it creates a lively mini commercial street within the site.",
+    },
+    {
+      images: [
+        'images/Qingfeng_Road_Primary_School/1.webp',
+        'images/Qingfeng_Road_Primary_School/2.webp',
+        'images/Qingfeng_Road_Primary_School/3.webp',
+        'images/Qingfeng_Road_Primary_School/4.webp',
+        'images/Qingfeng_Road_Primary_School/5.webp',
+        'images/Qingfeng_Road_Primary_School/6.webp',
+      ],
+      description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area.On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core.The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life.Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster.",
+    },
+    {
+      images: [
+        'images/Wuxi_Historical_Building_Interior_Renovation/1.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/2.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/3.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/4.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/5.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
+      ],
+      description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles.",
+    },
+  ];
 
-function openLightbox(index) {
-  const lightbox = document.getElementById('lightbox');
+const lightbox = document.getElementById('lightbox');
   const content = document.getElementById('lightbox-content');
   const desc = document.getElementById('lightbox-description');
+  const navbar = document.getElementById('navbar');
+  const scrollContainer = document.getElementById('lightbox-scroll-container');
 
-  // 清空之前图片
-  content.innerHTML = '';
+  function openLightbox(index) {
+    content.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    projects[index].images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Project Image ${src}`;
+      img.loading = 'lazy';
+      fragment.appendChild(img);
+    });
+    content.appendChild(fragment);
+    desc.textContent = projects[index].description;
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
 
-  projects[index].images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    content.appendChild(img);
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
   });
 
-  desc.textContent = projects[index].description;
+  function toggleMenu() {
+    navbar.classList.toggle('active');
+  }
 
-  lightbox.style.display = 'flex';
-}
+  // 抓手滚动功能绑定到 lightbox-scroll
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
+  scrollContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    scrollContainer.classList.add('grabbing');
+    startX = e.pageX - scrollContainer.offsetLeft;
+    scrollLeft = scrollContainer.scrollLeft;
+  });
 
-    function toggleMenu() {
-  document.getElementById('navbar').classList.toggle('active');
-}
+  scrollContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+    scrollContainer.classList.remove('grabbing');
+  });
 
-  </script>
+  scrollContainer.addEventListener('mouseup', () => {
+    isDown = false;
+    scrollContainer.classList.remove('grabbing');
+  });
+
+  scrollContainer.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollContainer.scrollLeft = scrollLeft - walk;
+  });
+</script>
+
 </body>
 </html>
