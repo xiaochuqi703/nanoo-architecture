@@ -55,60 +55,63 @@
       font-size: 1.2rem;
     }
 
-    .lightbox {
+.lightbox {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.95);
   display: none;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding: 20px;
-  white-space: normal;
   z-index: 2000;
-  padding-top:60px;
-  padding: 20px;
-  padding-bottom:120px;
+  overflow: hidden;
 }
 
-.lightbox img {
-  height: 70vh;              /* 设置统一高度 */
-  width: auto;
-  object-fit: contain;
-  margin: 0 10px;
-  flex-shrink: 0;            /* 防止图片被压缩 */
-}
-
+/* 图片滚动区域 */
 .lightbox-scroll {
-  display: flex;
+  height: 85vh; /* 图片显示区域固定为屏幕上 75% */
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  width: 100%;
-  padding:20px 0
-}
-
-
-.lightbox .description {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
   padding: 20px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.6;
-  z-index: 3000;
-  box-sizing: border-box;
-  white-space: normal;
-  overflow-y: auto;
-  max-height: 30vh;
 }
+
+
+/* 滚动条 */
+.lightbox-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.lightbox-scroll::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+/* 图片样式 */
+.lightbox-content img {
+  height: 100%;            /* 固定高度，统一大小 */
+  max-height: 100%;        /* 防止撑出容器 */
+  width: auto;             /* 宽度自适应，避免拉伸或裁切 */
+  display: inline-block;
+  margin-right: 10px;
+  object-fit: contain;     /* 保持图片完整显示（关键） */
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* 描述区只占下方 25% */
+.description {
+  height: 15vh;
+  width: 100%;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 15px 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
 
 
         .lightbox-close {
@@ -324,15 +327,17 @@
     </p>
   </section>
 
-  <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <!-- 横向滚动容器 -->
-    <div id="lightbox-scroll-container" class="lightbox-scroll">
-  <div id="lightbox-content"></div>
-</div>
-    <!-- 图片描述-->
-    <div class="description" id="lightbox-description"></div>
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+
+  <div id="lightbox-scroll-container" class="lightbox-scroll">
+    <div id="lightbox-content" class="lightbox-content"></div>
   </div>
+
+  <div class="description" id="lightbox-description"></div>
+</div>
+
+
 
   <script>
     const projects = [
@@ -382,23 +387,28 @@
       }
     ];
 
-    function openLightbox(index) {
-      const lightbox = document.getElementById('lightbox');
-      const content = document.getElementById('lightbox-content');
-      const desc = document.getElementById('lightbox-description');
-      content.innerHTML = '';
-      projects[index].images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        content.appendChild(img);
-      });
-      desc.textContent = projects[index].description;
-      lightbox.style.display = 'flex';
-    }
+function openLightbox(index) {
+  const lightbox = document.getElementById('lightbox');
+  const content = document.getElementById('lightbox-content');
+  const desc = document.getElementById('lightbox-description');
 
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
+  // 清空之前图片
+  content.innerHTML = '';
+
+  projects[index].images.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    content.appendChild(img);
+  });
+
+  desc.textContent = projects[index].description;
+
+  lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
 
     function toggleMenu() {
   document.getElementById('navbar').classList.toggle('active');
