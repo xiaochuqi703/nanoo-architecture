@@ -66,42 +66,35 @@
   overflow: hidden;
 }
 
-/* 图片滚动区域 */
 .lightbox-scroll {
-  height: 85vh; /* 图片显示区域固定为屏幕上 75% */
+  height: 80vh;
+  display:flex;
+  align-items:flex-start;
+  padding: 100px 20px 20px;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 20px;
 }
 
-
-/* 滚动条 */
-.lightbox-scroll::-webkit-scrollbar {
-  height: 8px;
+.lightbox-content {
+  height: 100%;             /* ✅ 新增 */
 }
 
-.lightbox-scroll::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 4px;
-}
-
-/* 图片样式 */
 .lightbox-content img {
-  height: 100%;            /* 固定高度，统一大小 */
-  max-height: 100%;        /* 防止撑出容器 */
-  width: auto;             /* 宽度自适应，避免拉伸或裁切 */
+  height: 60vh;             /* 保留 */
+  max-height: 60vh;
+  width: auto;
   display: inline-block;
   margin-right: 10px;
-  object-fit: contain;     /* 保持图片完整显示（关键） */
+  object-fit: contain;
   user-select: none;
   pointer-events: none;
 }
 
 
-/* 描述区只占下方 25% */
+/* 描述区只占下方 20% */
 .description {
-  height: 15vh;
+  height: 20vh;
   width: 100%;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.9);
@@ -373,18 +366,6 @@
         ],
         description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles."
       },
-      {
-        images: [
-          'images/Wuxi Historical Building Interior Renovation/Scene 0.jpg',
-          'images/Wuxi Historical Building Interior Renovation/Scene 2',
-          'images/Wuxi Historical Building Interior Renovation/Scene 3',
-          'images/Wuxi Historical Building Interior Renovation/Scene 7',
-           'images/Wuxi Historical Building Interior Renovation/Scene 9',
-          'images/Wuxi Historical Building Interior Renovation/Scene 10',
-          'images/Wuxi Historical Building Interior Renovation/Scene 13',
-        ],
-        description: "Project 4 is a cultural center featuring performance venues and public plazas."
-      }
     ];
 
 function openLightbox(index) {
