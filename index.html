@@ -6,56 +6,78 @@
   <title>NANOO ARCHITECTURE</title>
   <link rel="icon" href="images/Favicon.png" type="image/png"/>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {font-family: sans-serif; background: #fff; color: #111; overflow-x: hidden;}
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
 
-    header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(5px);
-      z-index: 1000;
-    }
-    header img {
-      height: 40px;
-    }
-    nav a {
-      margin-left: 30px;
-      text-decoration: none;
-      color: #111;
-      font-size: 1rem;
-    }
+/* Header */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+header img {
+  height: 40px;
+}
+nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #111;
+  font-size: 1rem;
+}
 
-    .project-list {
-      padding: 100px 20px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      align-items: center;
-    }
-    .project-item {
-      cursor: pointer;
-      transition: transform 0.2s;
-      text-align: center;
-    }
-    .project-item:hover {
-      transform: scale(1.01);
-    }
-    .project-item img {
-      width: 100%;
-      max-width: 600px;
-      display: block;
-      margin: 0 auto 10px;
-    }
-    .project-item h3 {
-      font-size: 1.2rem;
-    }
+/* 项目列表 */
+.project-list {
+  padding: 100px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+.project-item {
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+}
+.project-item:hover {
+  transform: scale(1.01);
+}
+.project-item img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin-bottom: 10px;
+}
+.project-item h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.project-location {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 4px;
+}
 
+/* Lightbox */
 .lightbox {
   position: fixed;
   top: 0; left: 0;
@@ -65,8 +87,8 @@
   flex-direction: column;
   z-index: 2000;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.95);
 }
-
 .lightbox-scroll {
   height: 80vh;
   display: flex;
@@ -78,162 +100,151 @@
   cursor: grab;
   user-select: none;
   scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
-
-.lightbox-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.lightbox-scroll.grabbing {
-  cursor: grabbing;
-}
-
+.lightbox-scroll::-webkit-scrollbar { display: none; }
+.lightbox-scroll.grabbing { cursor: grabbing; }
 .lightbox-content {
-  height: 100%;
   display: flex;
   gap: 10px;
+  height: 100%;
 }
-
 .lightbox-content img {
   height: 60vh;
-  max-height: 60vh;
   width: auto;
-  display: inline-block;
   object-fit: contain;
-  user-select: none;
-  pointer-events: none;
   border-radius: 6px;
+  pointer-events: none;
+  user-select: none;
+  display: inline-block;
 }
 
-    .description {
-      height: 20vh;
-      width: 100%;
-      overflow-y: auto;
-      background: rgba(0, 0, 0, 0.9);
-      color: #fff;
-      padding: 15px 20px;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
+/* Lightbox 项目信息 */
+.lightbox-project-intro {
+  padding: 20px 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #333;
+}
+.project-info h2,
+.project-info p,
+.project-description {
+  margin: 0;
+  padding: 0;
+}
+.lightbox-project-intro .project-title {
+  font-family: 'Merriweather', serif; /* 你想要的字体 */
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #222;
+}
 
-    .lightbox-close {
-      position: fixed;
-      top: 20px; right: 30px;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-    }
+/* 项目地点显示灰色 */
+.lightbox-project-intro .project-location {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #888; /* 灰色 */
+  margin-top: 4px;
+}
 
-    section.about, section.contact {
-      padding: 80px 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    section.about h2, section.contact h2 {
-      margin-bottom: 0px;
-      font-size: 1.5rem;
-    }
-    section.about p, section.contact p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2em;
-    }
+/* 其他项目信息保持深色 */
+.lightbox-project-intro .project-type,
+.lightbox-project-intro .project-phase,
+.lightbox-project-intro .project-award {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #222; /* 黑色或深色 */
+  margin-top: 4px;
+}
 
-    .founders {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-top: 40px;
-      justify-content: center;
-    }
+.project-info {
+  margin-bottom: 20px;
+}
+.description {
+  width: 100%;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0;
+}
 
-    .founder {
-      width: 250px;
-      text-align: center;
-    }
+/* Lightbox 关闭按钮 */
+.lightbox-close {
+  position: fixed;
+  top: 20px; right: 30px;
+  color: #000;
+  font-size: 2rem;
+  cursor: pointer;
+}
 
-    .founder img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
+/* About / Contact */
+section.about, section.contact {
+  padding: 80px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+section.about h2, section.contact h2 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+section.about p, section.contact p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2em;
+}
 
-    .founder h3 {
-      margin: 10px 0 8px;
-      font-size: 1.2rem;
-    }
+/* Founders */
+.founders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+  justify-content: center;
+}
+.founder {
+  width: 250px;
+  text-align: center;
+}
+.founder img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+.founder h3 {
+  margin: 10px 0 8px;
+  font-size: 1.2rem;
+}
+.founder p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
 
-    .founder p {
-      font-size: 0.8rem;
-      line-height: 1.5;
-    }
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-left: auto;
+}
 
-    .hamburger {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      margin-left: auto;
-    }
+/* 响应式 */
+@media (max-width: 768px) {
+  header { flex-direction: column; align-items: flex-start; padding: 10px 15px; }
+  nav { display: none; flex-direction: column; position: absolute; top: 60px; right: 20px; background: #fff; padding: 10px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 999; }
+  nav a { margin: 10px 0; font-size: 1rem; }
+  nav.active { display: flex; }
+  .hamburger { display: block; }
+  .project-item img { width: 90%; max-width: 300px; }
+  .project-item h3 { font-size: 1rem; }
+  .project-list { gap: 20px; }
+  .founders { flex-direction: column; align-items: center; }
+  .founder { width: 100%; max-width: 300px; }
+}
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 15px;
-      }
-
-      nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: white;
-        padding: 10px 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-      }
-
-      nav a {
-        margin: 10px 0;
-        font-size: 1rem;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .project-item img {
-        width: 90%;
-        max-width: 300px;
-      }
-
-      .project-item h3 {
-        font-size: 1rem;
-      }
-
-      .project-list {
-        gap: 20px;
-      }
-
-      .founders {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .founder {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
 
   </style>
 </head>
@@ -255,22 +266,27 @@
     <div class="project-item" onclick="openLightbox('Project4')">
       <img src="images/Shanghai_Substation/1.webp" alt="Project 4">
       <h3>All-Weather Promenade </h3>
+      <p class="project-location">Shanghai, China</p>
     </div>
     <div class="project-item" onclick="openLightbox('Project5')">
       <img src="images/Shanghai_Yanqing_Road_Market_Renovation/1.webp" alt="Project 5">
-      <h3>All-Weather Promenade </h3>
+      <h3>Long Table Community Living Room </h3>
+      <p class="project-location">Shanghai, China</p>
     </div>
     <div class="project-item" onclick="openLightbox('Project1')">
       <img src="images/Leifei_Hotel/1.webp" alt="Project 1">
       <h3>Lefei Hotel Renovation</h3>
+      <p class="project-location">Shanghai, China</p>
     </div>
     <div class="project-item" onclick="openLightbox('Project2')">
       <img src="images/Qingfeng_Road_Primary_School/1.webp" alt="Project 2">
       <h3>Qingfeng Road Primary School</h3>
+      <p class="project-location">Shenzhen, China</p>
     </div>
     <div class="project-item" onclick="openLightbox('Project3')">
       <img src="images/Wuxi_Historical_Building_Interior_Renovation/1.webp" alt="Project 3">
       <h3>Wuxi Historical Building Interior Renovation</h3>
+      <p class="project-location">Wuxi, China</p>
 
     </div>
   </section>
@@ -329,8 +345,19 @@
     <div id="lightbox-content" class="lightbox-content"></div>
   </div>
 
+<div class="lightbox-project-intro" id="lightbox-project-intro">
+  <div class="project-info" id="project-info">
+    <h2 class="project-title" id="lightbox-title"></h2>
+    <p class="project-location" id="lightbox-location"></p>
+    <p class="project-type" id="lightbox-type"></p>
+    <p class="project-phase" id="lightbox-phase"></p>
+    <p class="project-award" id="lightbox-award"></p>
+  </div>
+
   <div class="description" id="lightbox-description"></div>
 </div>
+
+
 
 
 
@@ -347,6 +374,11 @@
         'images/Shanghai_Substation/7.webp',
         'images/Shanghai_Substation/8.webp',
       ],
+      title: "All-Weather Promenade",   // 项目名称，可选
+      location: "Shanghai, China",      // 项目地点
+      type: "Type:Facade Design",       // 项目类型
+      phase: "Phase: Design Development",  // 项目阶段
+      Award: "Award:2025 Shanghai Infrastructure Design Award- First Prize",
       description: "The “All-weather Promenade” Substation centers on the concept of “sharing and integration,” exploring a symbiotic relationship between urban infrastructure and public life. The proposal optimizes the originally enclosed and isolated 110 kV substation interface by adjusting the building and driveway layout, releasing the site’s edges back to the public and transforming it into an accessible, inhabitable, and activity-friendly public space. Within the constraints of equipment clearance and operational safety, the building’s volume is moderately reduced, and its roofline extends toward the site boundaries. The space between the eaves and the perimeter wall forms a semi-open corridor—the “All-weather Promenade.” This public passageway not only provides shelter from sun and rain but also serves as a key public node along the riverside promenade, creating a comfortable environment for walking, jogging, and leisure. According to the site’s varying orientations and spatial characteristics, pavilions, viewing terraces, and fitness facilities are embedded within the promenade, shaping a vibrant riverside hub where a once single-purpose infrastructure evolves into a public platform for diverse activities.Formally, the roof and façade are designed as an integrated surface, producing a coherent and unified architectural expression. Clad in blue-green aluminum panels, the substation blends naturally with the surrounding park and river landscape. The use of standing seam panels ensures a clean, durable, and economical construction. Sustainability principles run throughout the design. Photovoltaic panels on the roof supply clean energy to the pavilions and fitness facilities, reducing external power dependence and creating a self-sustaining green system that also communicates the concept of low-carbon living in a direct and tangible way.Through optimized layout, integration of public space, and use of renewable energy, the “All-weather Promenade” transforms the substation from an urban barrier into a walkable, usable, and perceptible civic corridor—ensuring safe, efficient energy operation while endowing the site with new public value and enhancing both urban functionality and quality of life.",
   },
   Project5:{
@@ -358,6 +390,10 @@
         'images/Shanghai_Yanqing_Road_Market_Renovation/5.webp',
         'images/Shanghai_Yanqing_Road_Market_Renovation/6.webp',
       ],
+      title: "Long Table Community Living Room",   // 项目名称，可选
+      location: "Shanghai, China",      // 项目地点
+      type: "Type:Interior Renovation and Operation",  // 项目类型
+      phase: "Phase: Concept",  // 项目阶段
       description: "",
   },
   Project1:{
@@ -366,6 +402,10 @@
         'images/Leifei_Hotel/2.webp',
         'images/Leifei_Hotel/3.webp',
       ],
+      title: "Lefei Hotel Renovation",   // 项目名称，可选
+      location: "Shanghai, China",      // 项目地点
+      type: "Type:Facade Renovation",  // 项目类型
+      phase: "Phase: In Construction",  // 项目阶段
       description: "This project is located in Waigaoqiao, Pudong District, Shanghai, near the historic Gaoqiao Old Town. The client commissioned the renovation of the four-story podium of the Lefei Tower into a hotel. The ground floor will feature the hotel lobby, restaurant, and bar, while the second to fourth floors will house guest rooms. The hotel is designed to serve business travelers in the Waigaoqiao Free Trade Zone, as well as tourists and family guests.In response to the local architectural context, the façade has been redesigned in a Shanghai-style Art Deco aesthetic. The design also incorporates new  smoke exhaust windows, balancing functional requirements with visual harmony. Great care has been taken to preserve as much of the original stone façade as possible, minimizing alterations while ensuring a cohesive and elegant appearance. The façade of the bar area at the southwest corner is designed with folding doors, which can be fully opened when needed to connect the indoor bar with the outdoor seating area. Together with the food truck across the street, it creates a lively mini commercial street within the site.",
     },
   Project2:{
@@ -377,6 +417,10 @@
         'images/Qingfeng_Road_Primary_School/5.webp',
         'images/Qingfeng_Road_Primary_School/6.webp',
       ],
+      title: "Qingfeng Road Primary School",   // 项目名称，可选
+      location: "Shenzhen, China",      // 项目地点
+      type: "Type: Institute",  // 项目类型
+      phase: "Phase: Schematic Design",  // 项目阶段
       description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area.On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core.The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life.Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster.",
     },
   Project3:{
@@ -389,6 +433,10 @@
         'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
         'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
       ],
+      title: "Wuxi Historial Building Interior Renovation",   // 项目名称，可选
+      location: "Wuxi, China",      // 项目地点
+      type: "Type:Interior Renovation",  // 项目类型
+      phase: "Phase: Concept",  // 项目阶段
       description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles.",
     },
   };
@@ -399,22 +447,32 @@ const lightbox = document.getElementById('lightbox');
   const navbar = document.getElementById('navbar');
   const scrollContainer = document.getElementById('lightbox-scroll-container');
 
-  function openLightbox(index) {
-    content.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    projects[index].images.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `Project Image ${src}`;
-      img.loading = 'lazy';
-      fragment.appendChild(img);
-    });
-    content.appendChild(fragment);
-    desc.textContent = projects[index].description;
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+function openLightbox(index) {
+  const project = projects[index]; // 使用原来的索引逻辑
+  if (!project) {
+    console.error('Project not found at index', index);
+    return;
   }
+content.innerHTML = '';
+  document.getElementById('lightbox-title').textContent = project.title || '';
+  document.getElementById('lightbox-location').textContent = project.location || '';
+  document.getElementById('lightbox-type').textContent = project.type || '';
+  document.getElementById('lightbox-phase').textContent = project.phase || '';
+  document.getElementById('lightbox-award').textContent = project.Award || '';
+  document.getElementById('lightbox-description').textContent = project.description || '';
 
+  // 添加图片
+  project.images.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = project.title;
+    img.loading = 'lazy';
+    content.appendChild(img);
+  });
+
+  lightbox.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
   function closeLightbox() {
     lightbox.style.display = 'none';
     document.body.style.overflow = '';
