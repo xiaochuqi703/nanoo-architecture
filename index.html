@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NANOO ARCHITECTURE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>NANOO ARCHITECTURE - Innovative Architectural Design</title>
+  <meta name="description" content="NANOO Architecture - Innovative architectural and interior design services by Chuqi Xiao and Ran An. Specializing in commercial, residential, hospitality, and cultural projects.">
+  <meta name="keywords" content="architecture, interior design, Shanghai, renovation, commercial design, residential design">
+  <meta name="author" content="NANOO Architecture">
+  <meta property="og:title" content="NANOO ARCHITECTURE - Innovative Architectural Design">
+  <meta property="og:description" content="NANOO Architecture offers integrated architectural and interior design services for a global clientele.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="images/Favicon.png" type="image/png"/>
   <style>
 /* 全局重置 */
@@ -14,7 +22,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   background: #fff;
   color: #111;
   overflow-x: hidden;
@@ -30,8 +38,14 @@ header {
   justify-content: space-between;
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 header img {
   height: 40px;
@@ -41,6 +55,30 @@ nav a {
   text-decoration: none;
   color: #111;
   font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #007acc;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  width: 100%;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #007acc;
 }
 
 /* 项目列表 */
@@ -53,25 +91,39 @@ nav a {
 }
 .project-item {
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease;
   text-align: center;
+  padding: 15px;
 }
+
 .project-item:hover {
-  transform: scale(1.01);
+  transform: translateY(-5px);
+}
+
+.project-item:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
 }
 .project-item img {
   width: 100%;
   max-width: 600px;
   display: block;
   margin-bottom: 10px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.project-item:hover img {
+  transform: scale(1.02);
 }
 .project-item h3 {
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   font-size: 1rem;
 }
 .project-location {
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   font-size: 0.9rem;
   color: #888;
@@ -89,6 +141,13 @@ nav a {
   z-index: 2000;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+  opacity: 1;
 }
 .lightbox-scroll {
   height: 80vh;
@@ -117,12 +176,20 @@ nav a {
   pointer-events: none;
   user-select: none;
   display: inline-block;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Lightbox 项目信息 */
 .lightbox-project-intro {
   padding: 20px 40px;
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   font-size: 0.9rem;
   color: #333;
@@ -134,7 +201,7 @@ nav a {
   padding: 0;
 }
 .lightbox-project-intro .project-title {
-  font-family: 'Cormorant Garamond', serif /* 你想要的字体 */
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   font-size: 1rem;
   color: #222;
@@ -142,10 +209,10 @@ nav a {
 
 /* 项目地点显示灰色 */
 .lightbox-project-intro .project-location {
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   font-size: 0.9rem;
-  color: #888; /* 灰色 */
+  color: #888;
   margin-top: 4px;
 }
 
@@ -153,10 +220,10 @@ nav a {
 .lightbox-project-intro .project-type,
 .lightbox-project-intro .project-phase,
 .lightbox-project-intro .project-award {
-  font-family: 'Cormorant Garamond', serif
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   font-size: 0.9rem;
-  color: #222; /* 黑色或深色 */
+  color: #222;
   margin-top: 4px;
 }
 
@@ -179,6 +246,22 @@ nav a {
   color: #000;
   font-size: 2rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 2001;
+}
+
+.lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.lightbox-close:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
 }
 
 /* About / Contact */
@@ -231,20 +314,219 @@ section.about p, section.contact p {
   font-size: 1.8rem;
   cursor: pointer;
   margin-left: auto;
+  background: none;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.hamburger:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+/* Language Switcher */
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: #111;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+
+.lang-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.lang-btn.active {
+  color: #007acc;
+  background: rgba(0, 122, 204, 0.1);
+  font-weight: 600;
+}
+
+.lang-btn:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+.lang-separator {
+  color: #ccc;
+  font-size: 0.8rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.mobile-lang-switcher {
+  display: none;
 }
 
 /* 响应式 */
 @media (max-width: 768px) {
-  header { flex-direction: column; align-items: flex-start; padding: 10px 15px; }
-  nav { display: none; flex-direction: column; position: absolute; top: 60px; right: 20px; background: #fff; padding: 10px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 999; }
-  nav a { margin: 10px 0; font-size: 1rem; }
+  header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 10px 15px; 
+    position: relative;
+  }
+  
+  header .language-switcher {
+    display: none;
+  }
+  
+  nav { 
+    display: none; 
+    flex-direction: column; 
+    position: absolute; 
+    top: 60px; 
+    right: 20px; 
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+    border-radius: 8px;
+    z-index: 999; 
+    min-width: 150px;
+  }
+  
+  nav a { 
+    margin: 8px 0; 
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.2s ease;
+  }
+  
+  nav a:hover {
+    color: #666;
+  }
+  
   nav.active { display: flex; }
   .hamburger { display: block; }
-  .project-item img { width: 90%; max-width: 300px; }
-  .project-item h3 { font-size: 1rem; }
-  .project-list { gap: 20px; }
-  .founders { flex-direction: column; align-items: center; }
-  .founder { width: 100%; max-width: 300px; }
+  
+  .project-item img { 
+    width: 90%; 
+    max-width: 300px; 
+    border-radius: 4px;
+  }
+  
+  .project-item h3 { 
+    font-size: 1rem; 
+    margin: 8px 0 4px;
+  }
+  
+  .project-list { 
+    gap: 25px; 
+    padding: 100px 15px 40px;
+  }
+  
+  .founders { 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 30px;
+  }
+  
+  .founder { 
+    width: 100%; 
+    max-width: 300px; 
+  }
+  
+  .lightbox-scroll {
+    padding: 80px 15px 20px;
+  }
+  
+  .lightbox-project-intro {
+    padding: 15px 20px;
+  }
+  
+  .lightbox-content img {
+    height: 50vh;
+    min-width: 200px;
+  }
+  
+  .language-switcher {
+    display: none;
+  }
+  
+  .mobile-lang-switcher {
+    display: flex;
+  }
+  
+  .header-controls {
+    gap: 10px;
+  }
+  
+  .mobile-lang-switcher .lang-btn {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+  }
+  
+  .mobile-lang-switcher .lang-separator {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-item img {
+    width: 95%;
+    max-width: 250px;
+  }
+  
+  .project-item h3 {
+    font-size: 0.9rem;
+  }
+  
+  .project-location {
+    font-size: 0.8rem;
+  }
+  
+  .lightbox-content img {
+    height: 45vh;
+    min-width: 180px;
+  }
+  
+  .lightbox-project-intro {
+    padding: 10px 15px;
+  }
+  
+  .founder img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .mobile-lang-switcher .lang-btn {
+    font-size: 0.75rem;
+    padding: 3px 5px;
+  }
+  
+  .mobile-lang-switcher .lang-separator {
+    font-size: 0.65rem;
+  }
+  
+  .header-controls {
+    gap: 8px;
+  }
 }
 
 
@@ -252,101 +534,119 @@ section.about p, section.contact p {
 </head>
 <body>
   <header>
-    <img src="images\NANOO Architecture-Headshot Logo-Line Text.jpg" alt="Logo" />
-    <nav id="navbar">
-    <a href="#">Projects</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <img src="images/NANOO Architecture-Headshot Logo-Line Text.jpg" alt="NANOO Architecture Logo" />
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#projects" aria-label="View our projects" data-en="Projects" data-zh="项目">Projects</a>
+    <a href="#about" aria-label="Learn about NANOO Architecture" data-en="About" data-zh="关于">About</a>
+    <a href="#contact" aria-label="Contact NANOO Architecture" data-en="Contact" data-zh="联系">Contact</a>
   </nav>
-  <div class="hamburger" onclick="toggleMenu()">
-    ☰
+  
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+    <span class="lang-separator">|</span>
+    <button class="lang-btn" data-lang="zh" aria-label="切换到中文">中文</button>
+  </div>
+  <div class="header-controls">
+    <div class="language-switcher mobile-lang-switcher">
+      <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+      <span class="lang-separator">|</span>
+      <button class="lang-btn" data-lang="zh" aria-label="切换到中文">中文</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span aria-hidden="true">☰</span>
+    </button>
   </div>
 </header>
 
 
-  <section class="project-list">
-    <div class="project-item" onclick="openLightbox('Project4')">
-      <img src="images/Shanghai_Substation/1.webp" alt="Project 4">
-      <h3>ALL-WEATHER PROMENADE </h3>
-      <p class="project-location">Shanghai, China</p>
+  <section class="project-list" id="projects" role="main" aria-label="Architecture Projects">
+    <div class="project-item" onclick="openLightbox('Project4')" role="button" tabindex="0" aria-label="View ALL-WEATHER PROMENADE project details" onkeydown="handleProjectKeydown(event, 'Project4')">
+      <img src="images/Shanghai_Substation/1.webp" alt="ALL-WEATHER PROMENADE - Shanghai Substation facade design">
+      <h3 data-en="ALL-WEATHER PROMENADE" data-zh="晴雨间廊">ALL-WEATHER PROMENADE</h3>
+      <p class="project-location" data-en="Shanghai, China" data-zh="中国上海">Shanghai, China</p>
     </div>
-    <div class="project-item" onclick="openLightbox('Project5')">
-      <img src="images/Shanghai_Yanqing_Road_Market_Renovation/1.webp" alt="Project 5">
-      <h3>LONG TABLE COMMUNITY LIVING ROOM </h3>
-      <p class="project-location">Shanghai, China</p>
+    <div class="project-item" onclick="openLightbox('Project5')" role="button" tabindex="0" aria-label="View LONG TABLE COMMUNITY LIVING ROOM project details" onkeydown="handleProjectKeydown(event, 'Project5')">
+      <img src="images/Shanghai_Yanqing_Road_Market_Renovation/1.webp" alt="LONG TABLE COMMUNITY LIVING ROOM - Shanghai Yanqing Road Market Renovation">
+      <h3 data-en="LONG TABLE COMMUNITY LIVING ROOM" data-zh="长桌社区客厅">LONG TABLE COMMUNITY LIVING ROOM</h3>
+      <p class="project-location" data-en="Shanghai, China" data-zh="中国上海">Shanghai, China</p>
     </div>
-    <div class="project-item" onclick="openLightbox('Project1')">
-      <img src="images/Leifei_Hotel/1.webp" alt="Project 1">
-      <h3>LEFEI HOTEL RENOVATION</h3>
-      <p class="project-location">Shanghai, China</p>
+    <div class="project-item" onclick="openLightbox('Project1')" role="button" tabindex="0" aria-label="View LEFEI HOTEL RENOVATION project details" onkeydown="handleProjectKeydown(event, 'Project1')">
+      <img src="images/Leifei_Hotel/1.webp" alt="LEFEI HOTEL RENOVATION - Shanghai hotel facade renovation">
+      <h3 data-en="LEFEI HOTEL RENOVATION" data-zh="乐非酒店改造">LEFEI HOTEL RENOVATION</h3>
+      <p class="project-location" data-en="Shanghai, China" data-zh="中国上海">Shanghai, China</p>
     </div>
-    <div class="project-item" onclick="openLightbox('Project2')">
-      <img src="images/Qingfeng_Road_Primary_School/1.webp" alt="Project 2">
-      <h3>QINGFENG ROAD PRIMARY SCHOOL</h3>
-      <p class="project-location">Shenzhen, China</p>
+    <div class="project-item" onclick="openLightbox('Project2')" role="button" tabindex="0" aria-label="View QINGFENG ROAD PRIMARY SCHOOL project details" onkeydown="handleProjectKeydown(event, 'Project2')">
+      <img src="images/Qingfeng_Road_Primary_School/1.webp" alt="QINGFENG ROAD PRIMARY SCHOOL - Shenzhen educational facility design">
+      <h3 data-en="QINGFENG ROAD PRIMARY SCHOOL" data-zh="清风路小学">QINGFENG ROAD PRIMARY SCHOOL</h3>
+      <p class="project-location" data-en="Shenzhen, China" data-zh="中国深圳">Shenzhen, China</p>
     </div>
-      <div class="project-item" onclick="openLightbox('Project6')">
-      <img src="images/Nanjing_Luoshan_Village_Rural_Building_Renovation/1.webp" alt="Project 6">
-      <h3>REWEAVING NETS AND LIGHTS</h3>
-      <p class="project-location">Nanjing, China</p>
+      <div class="project-item" onclick="openLightbox('Project6')" role="button" tabindex="0" aria-label="View REWEAVING NETS AND LIGHTS project details" onkeydown="handleProjectKeydown(event, 'Project6')">
+      <img src="images/Nanjing_Luoshan_Village_Rural_Building_Renovation/1.webp" alt="REWEAVING NETS AND LIGHTS - Nanjing Luoshan Village rural building renovation">
+      <h3 data-en="REWEAVING NETS AND LIGHTS" data-zh="重织渔光">REWEAVING NETS AND LIGHTS</h3>
+      <p class="project-location" data-en="Nanjing, China" data-zh="中国南京">Nanjing, China</p>
     </div>
-    <div class="project-item" onclick="openLightbox('Project3')">
-      <img src="images/Wuxi_Historical_Building_Interior_Renovation/1.webp" alt="Project 3">
-      <h3>SLOW WEAVING, SLOW JOURNEY</h3>
-      <p class="project-location">Wuxi, China</p>
-
+    <div class="project-item" onclick="openLightbox('Project3')" role="button" tabindex="0" aria-label="View SLOW WEAVING, SLOW JOURNEY project details" onkeydown="handleProjectKeydown(event, 'Project3')">
+      <img src="images/Wuxi_Historical_Building_Interior_Renovation/1.webp" alt="SLOW WEAVING, SLOW JOURNEY - Wuxi historical building interior renovation">
+      <h3 data-en="SLOW WEAVING, SLOW JOURNEY" data-zh="细织，慢来">SLOW WEAVING, SLOW JOURNEY</h3>
+      <p class="project-location" data-en="Wuxi, China" data-zh="中国无锡">Wuxi, China</p>
     </div>
   </section>
 
-  <section id="about" class="about">
-    <h2>About</h2>
-    <p>
-      At NANOO Architecture, we believe that even the smallest things hold boundless potential. Architecture is not only about building spaces—it is also an expression of ideas and emotions.   </p>
-  <p>
-
-      NANOO Architecture established its Shanghai studio in 2024 by Chuqi Xiao and Ran An. We offer integrated architectural and interior design services for a global clientele. Both partners bring years of experience from New York and Shanghai, with expertise spanning commercial, residential, hospitality, cultural, and office projects—both new construction and renovation.   </p>
-  <p>
-
+  <section id="about" class="about" itemscope itemtype="https://schema.org/Organization">
+    <h2 data-en="About" data-zh="关于我们">About</h2>
+    <p itemprop="description" data-en="At NANOO Architecture, we believe that even the smallest things hold boundless potential. Architecture is not only about building spaces—it is also an expression of ideas and emotions." data-zh="在NANOO建筑，我们相信即使是最微小的事物也蕴含着无限可能。建筑不仅仅是建造空间——它也是思想和情感的表达。">
+      At NANOO Architecture, we believe that even the smallest things hold boundless potential. Architecture is not only about building spaces—it is also an expression of ideas and emotions.
+    </p>
+    <p data-en="NANOO Architecture established its Shanghai studio in 2024 by Chuqi Xiao and Ran An. We offer integrated architectural and interior design services for a global clientele. Both partners bring years of experience from New York and Shanghai, with expertise spanning commercial, residential, hospitality, cultural, and office projects—both new construction and renovation." data-zh="NANOO建筑由肖楚琪和安冉于2024年在上海创立工作室。我们为全球客户提供一体化的建筑和室内设计服务。两位合伙人拥有纽约和上海的丰富经验，专长涵盖商业、住宅、酒店、文化和办公项目——包括新建和改造。">
+      NANOO Architecture established its Shanghai studio in 2024 by Chuqi Xiao and Ran An. We offer integrated architectural and interior design services for a global clientele. Both partners bring years of experience from New York and Shanghai, with expertise spanning commercial, residential, hospitality, cultural, and office projects—both new construction and renovation.
+    </p>
+    <p data-en="With hands-on experience in project delivery, we ensure that every design is executed with precision, even under complex conditions. From concept to construction, we are committed to merging creativity with practicality—delivering projects that are both visionary and achievable. This is our pursuit—and our promise to every client." data-zh="凭借项目交付的实践经验，我们确保每个设计都能精准执行，即使在复杂条件下也是如此。从概念到施工，我们致力于将创意与实用性相结合——交付既富有远见又可实现的项目。这是我们的追求——也是我们对每一位客户的承诺。">
       With hands-on experience in project delivery, we ensure that every design is executed with precision, even under complex conditions. From concept to construction, we are committed to merging creativity with practicality—delivering projects that are both visionary and achievable. This is our pursuit—and our promise to every client.
-
-
     </p>
     <div class="founders">
-  <div class="founder">
-    <img src="images/Chuqi-0.webp" alt="Founder 1">
-    <h3>Chuqi Xiao</h3>
-    <p>Co-Founder | Lead Architect<br />
-       Class I Registered Architect in China <br />
-       US Registered Architect, AIA<br />
-       Bachelor of Architecture, Tianjin University<br />
-       Master of Architecture, Cornell University<br />
+      <div class="founder" itemscope itemtype="https://schema.org/Person">
+        <img src="images/Chuqi-0.webp" alt="Chuqi Xiao - Co-Founder and Lead Architect" itemprop="image">
+        <h3 itemprop="name">Chuqi Xiao</h3>
+        <p itemprop="jobTitle">Co-Founder | Lead Architect<br />
+           Class I Registered Architect in China<br />
+           US Registered Architect, AIA<br />
+           Bachelor of Architecture, Tianjin University<br />
+           Master of Architecture, Cornell University
+        </p>
+      </div>
+      <div class="founder" itemscope itemtype="https://schema.org/Person">
+        <img src="images/Ran-0.webp" alt="Ran An - Co-Founder and Lead Architect" itemprop="image">
+        <h3 itemprop="name">Ran An</h3>
+        <p itemprop="jobTitle">Co-Founder | Lead Architect<br />
+           US Registered Architect, AIA<br />
+           LEED GA<br />
+           Bachelor of Architecture, Tianjin University<br />
+           Master of Architecture, Columbia University
+        </p>
+      </div>
+    </div>
+
+
+  </section>
+
+  <section id="contact" class="contact" itemscope itemtype="https://schema.org/ContactPage">
+    <h2 data-en="Contact" data-zh="联系我们">Contact</h2>
+    <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
+      <p>
+        <span data-en="Email:" data-zh="邮箱：">Email:</span> <a href="mailto:info@nanoo-architecture.com" itemprop="email">info@nanoo-architecture.com</a><br />
+        <span data-en="Address:" data-zh="地址：">Address:</span> <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">6th Floor, Tower C, Country Garden Center, No. 613 Weinan Road</span>, 
+          <span itemprop="addressLocality">Yangpu District</span>, 
+          <span itemprop="addressRegion">Shanghai</span>, 
+          <span itemprop="addressCountry">China</span>
+        </span>
       </p>
-  </div>
-  <div class="founder">
-    <img src="images/Ran-0.webp" alt="Founder 2">
-    <h3>Ran An</h3>
-    <p>Co-Founder | Lead Architect<br />
-       US Registered Architect, AIA<br />
-       LEED GA<br />
-       Bachelor of Architecture, Tianjin University<br />
-       Master of Architecture, Columbia University<br />
-    </p>
-  </div>
-</div>
-
-
+    </div>
   </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>
-      Email: info@nanoo-architecture.com<br />
-      Address: 6th Floor, Tower C, Country Garden CenterNo. 613 Weinan Road, Yangpu District, Shanghai, China
-    </p>
-  </section>
-
-<div class="lightbox" id="lightbox">
-  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close project details">&times;</button>
 
   <div id="lightbox-scroll-container" class="lightbox-scroll">
     <div id="lightbox-content" class="lightbox-content"></div>
@@ -369,8 +669,222 @@ section.about p, section.contact p {
 
 
   <script>
+  // Translation system
+  const translations = {
+    en: {
+      // Navigation
+      'nav.projects': 'Projects',
+      'nav.about': 'About',
+      'nav.contact': 'Contact',
+      
+      // Project titles
+      'project.all-weather-promenade': 'ALL-WEATHER PROMENADE',
+      'project.long-table-community': 'LONG TABLE COMMUNITY LIVING ROOM',
+      'project.lefei-hotel': 'LEFEI HOTEL RENOVATION',
+      'project.qingfeng-school': 'QINGFENG ROAD PRIMARY SCHOOL',
+      'project.reweaving-nets': 'REWEAVING NETS AND LIGHTS',
+      'project.slow-weaving': 'SLOW WEAVING, SLOW JOURNEY',
+      
+      // Locations
+      'location.shanghai': 'Shanghai, China',
+      'location.shenzhen': 'Shenzhen, China',
+      'location.nanjing': 'Nanjing, China',
+      'location.wuxi': 'Wuxi, China',
+      
+      // About section
+      'about.title': 'About',
+      'about.description1': 'At NANOO Architecture, we believe that even the smallest things hold boundless potential. Architecture is not only about building spaces—it is also an expression of ideas and emotions.',
+      'about.description2': 'NANOO Architecture established its Shanghai studio in 2024 by Chuqi Xiao and Ran An. We offer integrated architectural and interior design services for a global clientele. Both partners bring years of experience from New York and Shanghai, with expertise spanning commercial, residential, hospitality, cultural, and office projects—both new construction and renovation.',
+      'about.description3': 'With hands-on experience in project delivery, we ensure that every design is executed with precision, even under complex conditions. From concept to construction, we are committed to merging creativity with practicality—delivering projects that are both visionary and achievable. This is our pursuit—and our promise to every client.',
+      
+      // Contact section
+      'contact.title': 'Contact',
+      'contact.email': 'Email:',
+      'contact.address': 'Address:',
+      
+      // Project types and phases
+      'type.facade-design': 'Type: Facade Design',
+      'type.interior-renovation': 'Type: Interior Renovation and Operation',
+      'type.facade-renovation': 'Type: Facade Renovation',
+      'type.rural-renovation': 'Type: Rural Building Renovation',
+      'type.institute': 'Type: Institute',
+      'type.interior-renovation-only': 'Type: Interior Renovation',
+      
+      'phase.design-development': 'Phase: Design Development',
+      'phase.concept': 'Phase: Concept',
+      'phase.construction': 'Phase: In Construction',
+      'phase.schematic': 'Phase: Schematic Design',
+      
+      'award.substation': 'Award: 2025 Shanghai Infrastructure Design Award - First Prize'
+    },
+    
+    zh: {
+      // Navigation
+      'nav.projects': '项目',
+      'nav.about': '关于',
+      'nav.contact': '联系',
+      
+      // Project titles
+      'project.all-weather-promenade': '晴雨间廊',
+      'project.long-table-community': '长桌社区客厅',
+      'project.lefei-hotel': '乐酒店改造',
+      'project.qingfeng-school': '清风路小学',
+      'project.reweaving-nets': '重织渔光',
+      'project.slow-weaving': '细织，慢来',
+      
+      // Locations
+      'location.shanghai': '中国上海',
+      'location.shenzhen': '中国深圳',
+      'location.nanjing': '中国南京',
+      'location.wuxi': '中国无锡',
+      
+      // About section
+      'about.title': '关于我们',
+      'about.description1': '在NANOO建筑，我们相信即使是最微小的事物也蕴含着无限可能。建筑不仅仅是建造空间——它也是思想和情感的表达。',
+      'about.description2': 'NANOO建筑由肖楚琦和安然于2024年在上海创立工作室。我们为全球客户提供一体化的建筑和室内设计服务。两位合伙人拥有纽约和上海的丰富经验，专长涵盖商业、住宅、酒店、文化和办公项目——包括新建和改造。',
+      'about.description3': '凭借项目交付的实践经验，我们确保每个设计都能精准执行，即使在复杂条件下也是如此。从概念到施工，我们致力于将创意与实用性相结合——交付既富有远见又可实现的项目。这是我们的追求——也是我们对每一位客户的承诺。',
+      
+      // Contact section
+      'contact.title': '联系我们',
+      'contact.email': '邮箱：',
+      'contact.address': '地址：',
+      
+      // Project types and phases
+      'type.facade-design': '类型：立面设计',
+      'type.interior-renovation': '类型：室内改造与运营',
+      'type.facade-renovation': '类型：立面改造',
+      'type.rural-renovation': '类型：乡村建筑改造',
+      'type.institute': '类型：教育机构',
+      'type.interior-renovation-only': '类型：室内改造',
+      
+      'phase.design-development': '阶段：设计深化',
+      'phase.concept': '阶段：概念设计',
+      'phase.construction': '阶段：建设中',
+      'phase.schematic': '阶段：方案设计',
+      
+      'award.substation': '奖项：2025上海基础设施设计奖 - 一等奖'
+    }
+  };
+  
+  // Current language
+  let currentLang = localStorage.getItem('nanoo-lang') || 'en';
+  
+  // Translation function
+  function translate(key) {
+    return translations[currentLang][key] || key;
+  }
+  
+  // Update text content
+  function updateTextContent() {
+    // Update all elements with data attributes
+    document.querySelectorAll('[data-en][data-zh]').forEach(element => {
+      const enText = element.getAttribute('data-en');
+      const zhText = element.getAttribute('data-zh');
+      element.textContent = currentLang === 'zh' ? zhText : enText;
+    });
+    
+    // Update project data in JavaScript
+    updateProjectTranslations();
+  }
+  
+  // Update project translations in the projects object
+  function updateProjectTranslations() {
+    if (projects.Project4) {
+      projects.Project4.title = translate('project.all-weather-promenade');
+      projects.Project4.location = translate('location.shanghai');
+      projects.Project4.type = translate('type.facade-design');
+      projects.Project4.phase = translate('phase.design-development');
+      projects.Project4.Award = translate('award.substation');
+    }
+    
+    if (projects.Project5) {
+      projects.Project5.title = translate('project.long-table-community');
+      projects.Project5.location = translate('location.shanghai');
+      projects.Project5.type = translate('type.interior-renovation');
+      projects.Project5.phase = translate('phase.concept');
+    }
+    
+    if (projects.Project1) {
+      projects.Project1.title = translate('project.lefei-hotel');
+      projects.Project1.location = translate('location.shanghai');
+      projects.Project1.type = translate('type.facade-renovation');
+      projects.Project1.phase = translate('phase.construction');
+    }
+    
+    if (projects.Project6) {
+      projects.Project6.title = translate('project.reweaving-nets');
+      projects.Project6.location = translate('location.nanjing');
+      projects.Project6.type = translate('type.rural-renovation');
+      projects.Project6.phase = translate('phase.concept');
+    }
+    
+    if (projects.Project2) {
+      projects.Project2.title = translate('project.qingfeng-school');
+      projects.Project2.location = translate('location.shenzhen');
+      projects.Project2.type = translate('type.institute');
+      projects.Project2.phase = translate('phase.schematic');
+    }
+    
+    if (projects.Project3) {
+      projects.Project3.title = translate('project.slow-weaving');
+      projects.Project3.location = translate('location.wuxi');
+      projects.Project3.type = translate('type.interior-renovation-only');
+      projects.Project3.phase = translate('phase.concept');
+    }
+  }
+  
+  // Language switcher functionality
+  function initLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selectedLang = button.getAttribute('data-lang');
+        
+        // Update active state
+        langButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Update language
+        currentLang = selectedLang;
+        localStorage.setItem('nanoo-lang', currentLang);
+        
+        // Update document language
+        document.documentElement.lang = currentLang;
+        
+        // Update content
+        updateTextContent();
+      });
+    });
+    
+    // Set initial active state
+    const activeButton = document.querySelector(`[data-lang="${currentLang}"]`);
+    if (activeButton) {
+      langButtons.forEach(btn => btn.classList.remove('active'));
+      activeButton.classList.add('active');
+    }
+  }
+  
+  // Initialize language system
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set initial language from localStorage
+    const savedLang = localStorage.getItem('nanoo-lang') || 'en';
+    currentLang = savedLang;
+    
+    // Initialize language switcher
+    initLanguageSwitcher();
+    
+    // Update content with saved language
+    updateTextContent();
+    
+    // Set document language attribute
+    document.documentElement.lang = currentLang;
+  });
+  
+  // Project data structure - organized by project order
   const projects = {
-  Project4: {
+    // Project 1: ALL-WEATHER PROMENADE (Shanghai Substation)
+    Project4: {
       images: [
         'images/Shanghai_Substation/1.webp',
         'images/Shanghai_Substation/2.webp',
@@ -381,14 +895,29 @@ section.about p, section.contact p {
         'images/Shanghai_Substation/7.webp',
         'images/Shanghai_Substation/8.webp',
       ],
-      title: "ALL-WEATHER PROMENADE",   // 项目名称，可选
-      location: "Shanghai, China",      // 项目地点
-      type: "Type:Facade Design",       // 项目类型
-      phase: "Phase: Design Development",  // 项目阶段
-      Award: "Award:2025 Shanghai Infrastructure Design Award- First Prize",
-      description: "The “All-weather Promenade” Substation centers on the concept of “sharing and integration,” exploring a symbiotic relationship between urban infrastructure and public life. The proposal optimizes the originally enclosed and isolated 110 kV substation interface by adjusting the building and driveway layout, releasing the site’s edges back to the public and transforming it into an accessible, inhabitable, and activity-friendly public space. Within the constraints of equipment clearance and operational safety, the building’s volume is moderately reduced, and its roofline extends toward the site boundaries. The space between the eaves and the perimeter wall forms a semi-open corridor—the “All-weather Promenade.” This public passageway not only provides shelter from sun and rain but also serves as a key public node along the riverside promenade, creating a comfortable environment for walking, jogging, and leisure. According to the site’s varying orientations and spatial characteristics, pavilions, viewing terraces, and fitness facilities are embedded within the promenade, shaping a vibrant riverside hub where a once single-purpose infrastructure evolves into a public platform for diverse activities.Formally, the roof and façade are designed as an integrated surface, producing a coherent and unified architectural expression. Clad in blue-green aluminum panels, the substation blends naturally with the surrounding park and river landscape. The use of standing seam panels ensures a clean, durable, and economical construction. Sustainability principles run throughout the design. Photovoltaic panels on the roof supply clean energy to the pavilions and fitness facilities, reducing external power dependence and creating a self-sustaining green system that also communicates the concept of low-carbon living in a direct and tangible way.Through optimized layout, integration of public space, and use of renewable energy, the “All-weather Promenade” transforms the substation from an urban barrier into a walkable, usable, and perceptible civic corridor—ensuring safe, efficient energy operation while endowing the site with new public value and enhancing both urban functionality and quality of life.",
-  },
-  Project5:{
+      // English content
+      en: {
+        title: "ALL-WEATHER PROMENADE",
+        location: "Shanghai, China",
+        type: "Type: Facade Design",
+        phase: "Phase: Design Development",
+        award: "Award: 2025 Shanghai Infrastructure Design Award - First Prize",
+        description: "The \\"All-weather Promenade\\" Substation centers on the concept of \\"sharing and integration,\\" exploring a symbiotic relationship between urban infrastructure and public life. The proposal optimizes the originally enclosed and isolated 110 kV substation interface by adjusting the building and driveway layout, releasing the site's edges back to the public and transforming it into an accessible, inhabitable, and activity-friendly public space. Within the constraints of equipment clearance and operational safety, the building's volume is moderately reduced, and its roofline extends toward the site boundaries. The space between the eaves and the perimeter wall forms a semi-open corridor—the \\"All-weather Promenade.\\" This public passageway not only provides shelter from sun and rain but also serves as a key public node along the riverside promenade, creating a comfortable environment for walking, jogging, and leisure. According to the site's varying orientations and spatial characteristics, pavilions, viewing terraces, and fitness facilities are embedded within the promenade, shaping a vibrant riverside hub where a once single-purpose infrastructure evolves into a public platform for diverse activities. Formally, the roof and façade are designed as an integrated surface, producing a coherent and unified architectural expression. Clad in blue-green aluminum panels, the substation blends naturally with the surrounding park and river landscape. The use of standing seam panels ensures a clean, durable, and economical construction. Sustainability principles run throughout the design. Photovoltaic panels on the roof supply clean energy to the pavilions and fitness facilities, reducing external power dependence and creating a self-sustaining green system that also communicates the concept of low-carbon living in a direct and tangible way. Through optimized layout, integration of public space, and use of renewable energy, the \\"All-weather Promenade\\" transforms the substation from an urban barrier into a walkable, usable, and perceptible civic corridor—ensuring safe, efficient energy operation while endowing the site with new public value and enhancing both urban functionality and quality of life."
+      },
+      // Chinese content
+      zh: {
+        title: "晴雨间廊",
+        location: "中国上海",
+        type: "类型：立面设计",
+        phase: "阶段：设计深化",
+        award: "奖项：2025上海基础设施设计奖 - 一等奖",
+        description: "晴雨间廊变电站以\\"共享与融合\\"为核心理念，探索城市基础设施与公共生活的共生关系。方案通过调整建筑和车行道布局，优化原本封闭孤立的110kV变电站界面，将场地边缘重新释放给公众，转化为可进入、可居住、宜活动的公共空间。在设备净距和运营安全的约束下，适度缩减建筑体量，屋顶线向场地边界延伸。屋檐与围墙之间的空间形成半开放廊道——\\"晴雨间廊\\"。这一公共通道不仅提供遮阳避雨的功能，更成为滨水步道上的重要公共节点，为步行、慢跑和休闲营造舒适环境。根据场地不同的朝向和空间特征，在廊道中嵌入亭台、观景平台和健身设施，塑造充满活力的滨水枢纽，使原本单一功能的基础设施演变为多元活动的公共平台。形式上，屋顶与立面设计为一体化表面，产生连贯统一的建筑表达。采用蓝绿色铝板覆面，变电站与周边公园和河流景观自然融合。使用直立锁边板确保简洁、耐用、经济的建造方式。可持续性原则贯穿整个设计。屋顶光伏板为亭台和健身设施提供清洁能源，减少外部电力依赖，创造自给自足的绿色系统，以直接可感的方式传达低碳生活理念。通过优化布局、整合公共空间和使用可再生能源，\\"晴雨间廊\\"将变电站从城市障碍转变为可步行、可使用、可感知的市民走廊——在确保安全高效能源运营的同时，赋予场地新的公共价值，提升城市功能和品质。"
+      }
+    },
+    
+    // Project 2: LONG TABLE COMMUNITY LIVING ROOM (Shanghai Yanqing Road Market)
+    Project5: {
+    Project5: {
       images: [
         'images/Shanghai_Yanqing_Road_Market_Renovation/1.webp',
         'images/Shanghai_Yanqing_Road_Market_Renovation/2.webp',
@@ -397,25 +926,57 @@ section.about p, section.contact p {
         'images/Shanghai_Yanqing_Road_Market_Renovation/5.webp',
         'images/Shanghai_Yanqing_Road_Market_Renovation/6.webp',
       ],
-      title: "LONG TABLE COMMUNITY LIVING ROOM",   // 项目名称，可选
-      location: "Shanghai, China",      // 项目地点
-      type: "Type:Interior Renovation and Operation",  // 项目类型
-      phase: "Phase: Concept",  // 项目阶段
-      description: "The site on Yanqing Road is located at the core of the Hengfu Historic Conservation Area. It carries the city’s collective memory and historical continuity while providing a natural stage for commerce, leisure, and cultural activities—becoming a must-visit destination where residents and visitors alike can stroll, explore, and experience the city’s charm.Distinct from the surrounding areas known for upscale retail and tourist-oriented commerce, Yanqing Road retains a quieter, more lived-in atmosphere, rich with the potential for community cultural exchange. This proposal takes local handcrafted food, lifestyle retail, and community-friendly businesses as its starting point to create a lively “slow-living” street full of neighborhood warmth. By optimizing outdoor seating and the pedestrian system, “Plane Tree Rest Stations” are set every 50 meters to foster a relaxed, communal atmosphere. At the street’s end, the Yanqing Road No. 9 Market will be transformed into a “Long Table Living Room,” serving both daily consumption and social interaction needs while opening itself to connect residents and visitors—where everyday urban life and collective memory converge.Currently, the market’s internal spaces are loosely connected, and its façades remain closed off. The proposal introduces shared long tables and exhibition areas to create an integrated space combining “fresh market – community kitchen – cultural experience.” This will serve as an incubator for creative IPs based on local snacks and intangible culinary heritage, revitalizing the community. Spatially, the proposal opens up the Yanqing Road façade and reorganizes circulation through loops and passages that connect with the surrounding landscape—enhancing visibility, guiding foot traffic inward, and positioning the market as the vibrant core of the slow-living street. The architectural materials along the road are diverse, reflecting the elegance of Shanghai’s Haipai style. In the market renovation, new materials such as wood, terrazzo, jade-hued grilles, and recycled plastics are introduced—echoing the historic textures and colors while incorporating a contemporary sensibility, creating a harmonious yet layered streetscape. Unlike traditional wet markets, the “Long Table Living Room” is envisioned as a local culinary IP incubation hub. By hosting seasonal and festive food experience events that integrate display, tasting, and sales, the project builds synergy between offline engagement and online communication—gradually shaping a distinctive gastronomic identity for the Hengfu district. Meanwhile, the shared long table will also be open for booking by brands and residents alike, encouraging co-creation and strengthening community bonds.",
-  },
-  Project1:{
+      // English content
+      en: {
+        title: "LONG TABLE COMMUNITY LIVING ROOM",
+        location: "Shanghai, China",
+        type: "Type: Interior Renovation and Operation",
+        phase: "Phase: Concept",
+        award: "",
+        description: "The site on Yanqing Road is located at the core of the Hengfu Historic Conservation Area. It carries the city's collective memory and historical continuity while providing a natural stage for commerce, leisure, and cultural activities—becoming a must-visit destination where residents and visitors alike can stroll, explore, and experience the city's charm. Distinct from the surrounding areas known for upscale retail and tourist-oriented commerce, Yanqing Road retains a quieter, more lived-in atmosphere, rich with the potential for community cultural exchange. This proposal takes local handcrafted food, lifestyle retail, and community-friendly businesses as its starting point to create a lively "slow-living" street full of neighborhood warmth. By optimizing outdoor seating and the pedestrian system, "Plane Tree Rest Stations" are set every 50 meters to foster a relaxed, communal atmosphere. At the street's end, the Yanqing Road No. 9 Market will be transformed into a "Long Table Living Room," serving both daily consumption and social interaction needs while opening itself to connect residents and visitors—where everyday urban life and collective memory converge. Currently, the market's internal spaces are loosely connected, and its façades remain closed off. The proposal introduces shared long tables and exhibition areas to create an integrated space combining "fresh market – community kitchen – cultural experience." This will serve as an incubator for creative IPs based on local snacks and intangible culinary heritage, revitalizing the community. Spatially, the proposal opens up the Yanqing Road façade and reorganizes circulation through loops and passages that connect with the surrounding landscape—enhancing visibility, guiding foot traffic inward, and positioning the market as the vibrant core of the slow-living street. The architectural materials along the road are diverse, reflecting the elegance of Shanghai's Haipai style. In the market renovation, new materials such as wood, terrazzo, jade-hued grilles, and recycled plastics are introduced—echoing the historic textures and colors while incorporating a contemporary sensibility, creating a harmonious yet layered streetscape. Unlike traditional wet markets, the "Long Table Living Room" is envisioned as a local culinary IP incubation hub. By hosting seasonal and festive food experience events that integrate display, tasting, and sales, the project builds synergy between offline engagement and online communication—gradually shaping a distinctive gastronomic identity for the Hengfu district. Meanwhile, the shared long table will also be open for booking by brands and residents alike, encouraging co-creation and strengthening community bonds."
+      },
+      // Chinese content
+      zh: {
+        title: "长桌社区客厅",
+        location: "中国上海",
+        type: "类型：室内改造与运营",
+        phase: "阶段：概念设计",
+        award: "",
+        description: "延庆路场地位于衡复历史文化风貌区的核心地带，承载着城市的集体记忆和历史延续，同时为商业、休闲和文化活动提供天然舞台——成为居民和游客漫步、探索、体验城市魅力的必访目的地。与周边以高端零售和旅游导向商业闻名的区域不同，延庆路保持着更安静、更有生活气息的氛围，富含社区文化交流的潜力。本方案以本地手工食品、生活方式零售和社区友好商业为起点，创造充满邻里温情的活力"慢生活"街道。通过优化户外座椅和步行系统，每50米设置"梧桐树休息站"，营造轻松、社区化的氛围。在街道尽头，延庆路9号市场将改造为"长桌客厅"，既满足日常消费需求，又满足社交互动需求，同时开放自身连接居民和游客——在这里，日常城市生活与集体记忆交汇。目前，市场内部空间连接松散，立面仍然封闭。方案引入共享长桌和展示区域，创造结合"生鲜市场-社区厨房-文化体验"的整合空间。这将作为基于本地小食和非物质烹饪遗产的创意IP孵化器，振兴社区。空间上，方案打开延庆路立面，通过连接周边景观的环路和通道重新组织流线——增强可见性，引导人流向内，将市场定位为慢生活街道的活力核心。沿路的建筑材料多样，体现了上海海派风格的优雅。在市场改造中，引入木材、水磨石、玉色格栅和再生塑料等新材料——呼应历史纹理和色彩，同时融入当代感性，创造和谐而层次丰富的街道景观。与传统菜市场不同，"长桌客厅"被设想为本地美食IP孵化中心。通过举办融合展示、品尝和销售的季节性和节庆美食体验活动，项目在离线参与和在线传播之间建立协同效应——逐步塑造衡复区独特的美食身份。同时，共享长桌也将向品牌和居民开放预订，鼓励共创，加强社区纽带。"
+      }
+    },
+    
+    // Project 3: LEFEI HOTEL RENOVATION (Shanghai Hotel)
+    Project1: {
+    Project1: {
       images: [
         'images/Leifei_Hotel/1.webp',
         'images/Leifei_Hotel/2.webp',
         'images/Leifei_Hotel/3.webp',
       ],
-      title: "LEFEI HOTEL RENOVATION",   // 项目名称，可选
-      location: "Shanghai, China",      // 项目地点
-      type: "Type:Facade Renovation",  // 项目类型
-      phase: "Phase: In Construction",  // 项目阶段
-      description: "This project is located in Waigaoqiao, Pudong District, Shanghai, near the historic Gaoqiao Old Town. The client commissioned the renovation of the four-story podium of the Lefei Tower into a hotel. The ground floor will feature the hotel lobby, restaurant, and bar, while the second to fourth floors will house guest rooms. The hotel is designed to serve business travelers in the Waigaoqiao Free Trade Zone, as well as tourists and family guests.In response to the local architectural context, the façade has been redesigned in a Shanghai-style Art Deco aesthetic. The design also incorporates new  smoke exhaust windows, balancing functional requirements with visual harmony. Great care has been taken to preserve as much of the original stone façade as possible, minimizing alterations while ensuring a cohesive and elegant appearance. The façade of the bar area at the southwest corner is designed with folding doors, which can be fully opened when needed to connect the indoor bar with the outdoor seating area. Together with the food truck across the street, it creates a lively mini commercial street within the site.",
+      // English content
+      en: {
+        title: "LEFEI HOTEL RENOVATION",
+        location: "Shanghai, China",
+        type: "Type: Facade Renovation",
+        phase: "Phase: In Construction",
+        award: "",
+        description: "This project is located in Waigaoqiao, Pudong District, Shanghai, near the historic Gaoqiao Old Town. The client commissioned the renovation of the four-story podium of the Lefei Tower into a hotel. The ground floor will feature the hotel lobby, restaurant, and bar, while the second to fourth floors will house guest rooms. The hotel is designed to serve business travelers in the Waigaoqiao Free Trade Zone, as well as tourists and family guests. In response to the local architectural context, the façade has been redesigned in a Shanghai-style Art Deco aesthetic. The design also incorporates new smoke exhaust windows, balancing functional requirements with visual harmony. Great care has been taken to preserve as much of the original stone façade as possible, minimizing alterations while ensuring a cohesive and elegant appearance. The façade of the bar area at the southwest corner is designed with folding doors, which can be fully opened when needed to connect the indoor bar with the outdoor seating area. Together with the food truck across the street, it creates a lively mini commercial street within the site."
+      },
+      // Chinese content
+      zh: {
+        title: "乐非酒店改造",
+        location: "中国上海",
+        type: "类型：立面改造",
+        phase: "阶段：建设中",
+        award: "",
+        description: "本项目位于上海浦东新区外高桥，靠近历史悠久的古高桥老镇。客户委托将雷飞大厦四层裙楼改造为酒店。首层将设置酒店大堂、餐厅和酒吧，二至四层为客房。酒店设计服务于外高桥自贸区的商务旅客，以及游客和家庭客人。为回应当地建筑文脉，立面采用上海风格装饰艺术美学重新设计。设计还融入了新的排烟窗，平衡功能需求与视觉和谐。精心保留尽可能多的原始石材立面，在确保连贯优雅外观的同时最小化改动。西南角酒吧区域的立面设计为折叠门，需要时可完全打开，连接室内酒吧与户外座椅区域。与街对面的餐车一起，在场地内创造了一个充满活力的迷你商业街。"
+      }
     },
-  Project6:{
+    
+    // Project 4: REWEAVING NETS AND LIGHTS (Nanjing Luoshan Village)
+    Project6: {
+    Project6: {
       images: [
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/1.webp',
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/2.webp',
@@ -423,13 +984,28 @@ section.about p, section.contact p {
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/4.webp',
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/5.webp',
       ],
-      title: "REWEAVING NETS AND LIGHTS",   // 项目名称，可选
-      location: "Nanjing, China",      // 项目地点
-      type: "Type:Rural Building Renovation",  // 项目类型
-      phase: "Phase: Concept",  // 项目阶段
-      description: "The project is located in Luoshan Village on the shore of Shijiu Lake, once a fishing settlement by livelihood. Today, many of the village houses are old and dilapidated, and the spatial texture has become blurred, yet the site still preserves a unique scene where stone walls, trees, and lake reflections intertwine. The design takes the “fishing net” and “fishing lantern” as its core concepts, extracting spatial logic and renewal strategies from the village’s traditional way of life to explore a reconstruction path where the old and new coexist and nature and culture are interwoven.The “fishing net” symbolizes connection and stands as the most representative emblem of fishing culture. Inspired by this, the project removes buildings with little heritage value, preserves existing stone walls and trees, and uses lightweight corridors to “weave” new threads into the original spatial fabric—allowing old and new structures to intertwine and continue the memory of the place.The “fishing lantern” symbolizes hope and gathering—the spiritual essence of fishermen’s life in the night. New buildings draw from this imagery, appearing as glowing dots floating upon the “net.” By day, they accommodate a mix of functions such as study tours, dining, and lodging; by night, their lights reflect upon the lake, composing a poetic scene of “lanterns rising over the fishing village.” The program volumes are relatively independent, connected by corridors and courtyards, creating a layered circulation and an open, fluid spatial experience.“Reweaving the Light of the Fishery” represents both spatial reconstruction and cultural regeneration. Through the “net’s” connections and the “lantern’s” illumination, the design reweaves the memory of the fishing village into contemporary life—reviving the warmth and vitality of the countryside and marking a new chapter in the rural revitalization along the shores of Shijiu Lake.",
+      // English content
+      en: {
+        title: "REWEAVING NETS AND LIGHTS",
+        location: "Nanjing, China",
+        type: "Type: Rural Building Renovation",
+        phase: "Phase: Concept",
+        award: "",
+        description: "The project is located in Luoshan Village on the shore of Shijiu Lake, once a fishing settlement by livelihood. Today, many of the village houses are old and dilapidated, and the spatial texture has become blurred, yet the site still preserves a unique scene where stone walls, trees, and lake reflections intertwine. The design takes the "fishing net" and "fishing lantern" as its core concepts, extracting spatial logic and renewal strategies from the village's traditional way of life to explore a reconstruction path where the old and new coexist and nature and culture are interwoven. The "fishing net" symbolizes connection and stands as the most representative emblem of fishing culture. Inspired by this, the project removes buildings with little heritage value, preserves existing stone walls and trees, and uses lightweight corridors to "weave" new threads into the original spatial fabric—allowing old and new structures to intertwine and continue the memory of the place. The "fishing lantern" symbolizes hope and gathering—the spiritual essence of fishermen's life in the night. New buildings draw from this imagery, appearing as glowing dots floating upon the "net." By day, they accommodate a mix of functions such as study tours, dining, and lodging; by night, their lights reflect upon the lake, composing a poetic scene of "lanterns rising over the fishing village." The program volumes are relatively independent, connected by corridors and courtyards, creating a layered circulation and an open, fluid spatial experience. "Reweaving the Light of the Fishery" represents both spatial reconstruction and cultural regeneration. Through the "net's" connections and the "lantern's" illumination, the design reweaves the memory of the fishing village into contemporary life—reviving the warmth and vitality of the countryside and marking a new chapter in the rural revitalization along the shores of Shijiu Lake."
+      },
+      // Chinese content
+      zh: {
+        title: "重织渔光",
+        location: "中国南京",
+        type: "类型：乡村建筑改造",
+        phase: "阶段：概念设计",
+        award: "",
+        description: "项目位于石臼湖畔的罗山村，曾是靠渔业为生的渔村。如今，许多村舍破旧不堪，空间肌理变得模糊，但场地仍保留着石墙、树木与湖光倒影交织的独特景象。设计以"渔网"和"渔灯"为核心概念，从村庄传统生活方式中提取空间逻辑和更新策略，探索新旧共存、自然与文化交织的重建路径。渔网"象征连接，是渔业文化最具代表性的象征。受此启发，项目移除遗产价值较低的建筑，保留现有石墙和树木，使用轻质廊道将新线索"编织"进原始空间肌理——让新旧结构交织，延续场所记忆。渔灯"象征希望与聚集——渔民夜间生活的精神本质。新建筑借鉴这一意象，如漂浮在"网"上的发光点。白天，它们容纳研学、餐饮、住宿等混合功能；夜晚，灯光倒映湖面，构成"渔村灯火"的诗意景象。功能体量相对独立，通过廊道和庭院连接，创造层次丰富的流线和开放流动的空间体验。重织渔光"既代表空间重建，也代表文化再生。通过"网"的连接和"灯"的照明，设计将渔村记忆重新编织进当代生活——重燃乡村的温暖与活力，在石臼湖畔谱写乡村振兴的新篇章。"
+      }
     },
-  Project2:{
+    
+    // Project 5: QINGFENG ROAD PRIMARY SCHOOL (Shenzhen School)
+    Project2: {
       images: [
         'images/Qingfeng_Road_Primary_School/1.webp',
         'images/Qingfeng_Road_Primary_School/2.webp',
@@ -438,13 +1014,28 @@ section.about p, section.contact p {
         'images/Qingfeng_Road_Primary_School/5.webp',
         'images/Qingfeng_Road_Primary_School/6.webp',
       ],
-      title: "QINGFENG ROAD PRIMARY SCHOOL",   // 项目名称，可选
-      location: "Shenzhen, China",      // 项目地点
-      type: "Type: Institute",  // 项目类型
-      phase: "Phase: Schematic Design",  // 项目阶段
-      description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area.On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core.The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life.Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster.",
+      // English content
+      en: {
+        title: "QINGFENG ROAD PRIMARY SCHOOL",
+        location: "Shenzhen, China",
+        type: "Type: Institute",
+        phase: "Phase: Schematic Design",
+        award: "",
+        description: "This project is located at the intersection of Qingfeng Avenue and Qiushi Street in Longgang District, Shenzhen. The site area is 9,007.27 sqm, with a total building area of 22,763 sqm. The design reconfigures the campus layout with a spatial strategy centered on optimizing the orientation of the playground. By rotating the playground 10 degrees westward from the north-south axis, it achieves optimal sun exposure while naturally dividing the site into two main functional zones: the teaching and living area, and the community-sharing area. On the west side, a clear, cluster-based layout is adopted. The teaching zone forms a quiet academic cluster through efficient modular units. The adjacent living area, connected via sheltered walkways, is spaced for comfort and maintains both functional independence and convenient integration, together shaping a calm and orderly campus core. The east side is dedicated to a multifunctional activity zone, housing spaces such as the library, rehearsal hall, and club rooms, all designed to be shared with the community. An independent circulation path near the main road allows these areas to open to the public outside school hours, promoting a soft integration of educational and urban life. Art classrooms and exhibition-capable spaces are linked in a gallery-like corridor that connects the teaching area with the activity zone, forming the main indoor bridge between the two. This spatial restructuring, grounded in both educational functionality and community sharing, creates a transparent, vibrant new type of learning cluster."
+      },
+      // Chinese content
+      zh: {
+        title: "清风路小学",
+        location: "中国深圳",
+        type: "类型：教育机构",
+        phase: "阶段：方案设计",
+        award: "",
+        description: "本项目位于深圳龙岗区清风大道与求实街交汇处。场地面积9,007.27平方米，总建筑面积22,763平方米。设计以优化操场朝向为中心的空间策略重新配置校园布局。通过将操场从南北轴线向西旋转10度，实现最佳日照，同时自然将场地分为两个主要功能区域：教学生活区和社区共享区。西侧采用清晰的集群式布局。教学区通过高效的模块化单元形成安静的学习集群。相邻的生活区通过有顶走廊连接，间距舒适，既保持功能独立性又便于整合，共同塑造安静有序的校园核心。东侧专门用于多功能活动区，容纳图书馆、排练厅和社团活动室等空间，均设计为与社区共享。靠近主路的独立流线路径允许这些区域在课外时间向公众开放，促进教育与城市生活的软性融合。美术教室和可展览空间通过画廊式走廊连接，连接教学区与活动区，形成两者间的主要室内桥梁。这种基于教育功能和社区共享的空间重构，创造了一种透明、充满活力的新型学习集群。"
+      }
     },
-  Project3:{
+    
+    // Project 6: SLOW WEAVING, SLOW JOURNEY (Wuxi Historical Building)
+    Project3: {
       images: [
         'images/Wuxi_Historical_Building_Interior_Renovation/1.webp',
         'images/Wuxi_Historical_Building_Interior_Renovation/2.webp',
@@ -454,90 +1045,318 @@ section.about p, section.contact p {
         'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
         'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
       ],
-      title: "SLOW WEAVING, SLOW JOURNEY",   // 项目名称，可选
-      location: "Wuxi, China",      // 项目地点
-      type: "Type:Interior Renovation",  // 项目类型
-      phase: "Phase: Concept",  // 项目阶段
-      description: "The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles.",
-    },
+      // English content
+      en: {
+        title: "SLOW WEAVING, SLOW JOURNEY",
+        location: "Wuxi, China",
+        type: "Type: Interior Renovation",
+        phase: "Phase: Concept",
+        award: "",
+        description: "The design concept originates from the historical background of the Zhangshi Jialetang's former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city's public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles."
+      },
+      // Chinese content
+      zh: {
+        title: "细织，慢来",
+        location: "中国无锡",
+        type: "类型：室内改造",
+        phase: "阶段：概念设计",
+        award: "",
+        description: "设计概念源于张氏嘉乐堂前主人——清风纺织厂工人的历史背景。通过利用纺织品的透明性和流动性，我们将建筑改造为集传统纺织主题民间艺术体验工坊、联合办公区域和茶室于一体的多功能空间。柔软纺织品作为空间创造的媒介，包裹历史建筑内部，为停留、探索、展示和休息创造新的体验场景。我们打开原本封闭的城市立面，在场地内创造24小时共享开放艺术工坊空间，将其延伸为城市公共空间的延续。纺织品不仅是物理媒介，更象征着人与空间、历史与文化的连接，营造慢节奏、温暖的空间体验，让访客在纺织品的拥抱中感受时光和文化传承的温柔触感。"
+      }
+    }
   };
 
+// DOM Elements
 const lightbox = document.getElementById('lightbox');
-  const content = document.getElementById('lightbox-content');
-  const desc = document.getElementById('lightbox-description');
-  const navbar = document.getElementById('navbar');
-  const scrollContainer = document.getElementById('lightbox-scroll-container');
+const content = document.getElementById('lightbox-content');
+const desc = document.getElementById('lightbox-description');
+const navbar = document.getElementById('navbar');
+const scrollContainer = document.getElementById('lightbox-scroll-container');
 
+// Utility functions
+const utils = {
+  // Debounce function for performance
+  debounce: (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  },
+  
+  // Check if element is in viewport
+  isInViewport: (element) => {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+};
+
+// Project management
+const projectManager = {
+  open: (index) => {
+    try {
+      const project = projects[index];
+      if (!project) {
+        throw new Error(`Project not found: ${index}`);
+      }
+      
+      // Clear previous content
+      content.innerHTML = '';
+      
+      // Update project information
+      const updateElement = (id, value) => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.textContent = value || '';
+        }
+      };
+      
+      // Get current language content
+      const lang = currentLang;
+      const projectContent = project[lang] || project.en;
+      
+      updateElement('lightbox-title', projectContent.title);
+      updateElement('lightbox-location', projectContent.location);
+      updateElement('lightbox-type', projectContent.type);
+      updateElement('lightbox-phase', projectContent.phase);
+      updateElement('lightbox-award', projectContent.award);
+      updateElement('lightbox-description', projectContent.description);
+
+      // Add images with error handling
+      project.images.forEach((src, idx) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${projectContent.title} - Image ${idx + 1}`;
+        img.loading = 'eager';
+        img.decoding = 'async';
+        img.style.minWidth = '200px';
+        img.style.flexShrink = '0';
+        
+        img.onerror = function() {
+          this.style.display = 'none';
+          console.warn(`Failed to load image: ${src}`);
+        };
+        
+        content.appendChild(img);
+      });
+
+      // Show lightbox with animation
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      
+      // Trigger animation
+      requestAnimationFrame(() => {
+        lightbox.classList.add('show');
+      });
+      
+      // Focus management
+      const closeButton = document.querySelector('.lightbox-close');
+      if (closeButton) {
+        closeButton.focus();
+      }
+      
+    } catch (error) {
+      console.error('Error opening project:', error);
+      // Could show user-friendly error message here
+    }
+  },
+  
+  close: () => {
+    lightbox.classList.remove('show');
+    
+    // Wait for animation to complete
+    setTimeout(() => {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      
+      // Return focus
+      const activeProject = document.querySelector('.project-item:focus');
+      if (activeProject) {
+        activeProject.focus();
+      }
+    }, 300);
+  }
+};
+
+// Legacy function for backward compatibility
 function openLightbox(index) {
-  const project = projects[index]; // 使用原来的索引逻辑
-  if (!project) {
-    console.error('Project not found at index', index);
-    return;
-  }
-content.innerHTML = '';
-  document.getElementById('lightbox-title').textContent = project.title || '';
-  document.getElementById('lightbox-location').textContent = project.location || '';
-  document.getElementById('lightbox-type').textContent = project.type || '';
-  document.getElementById('lightbox-phase').textContent = project.phase || '';
-  document.getElementById('lightbox-award').textContent = project.Award || '';
-  document.getElementById('lightbox-description').textContent = project.description || '';
-
-  // 添加图片
-  project.images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = project.title;
-    img.loading = 'lazy';
-    content.appendChild(img);
-  });
-
-  lightbox.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  projectManager.open(index);
 }
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = '';
-  }
+// Legacy function for backward compatibility
+function closeLightbox() {
+  projectManager.close();
+}
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      closeLightbox();
+      if (lightbox.style.display === 'flex') {
+        closeLightbox();
+      } else if (navbar.classList.contains('active')) {
+        navbar.classList.remove('active');
+        document.querySelector('.hamburger').setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navbar.classList.contains('active') && 
+        !navbar.contains(e.target) && 
+        !document.querySelector('.hamburger').contains(e.target)) {
+      navbar.classList.remove('active');
+      document.querySelector('.hamburger').setAttribute('aria-expanded', 'false');
     }
   });
 
   function toggleMenu() {
+    const isActive = navbar.classList.contains('active');
     navbar.classList.toggle('active');
+    
+    // Update ARIA attributes
+    const hamburger = document.querySelector('.hamburger');
+    hamburger.setAttribute('aria-expanded', !isActive);
+  }
+  
+  // Keyboard navigation for project items
+  function handleProjectKeydown(event, projectId) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openLightbox(projectId);
+    }
   }
 
-  // 抓手滚动功能绑定到 lightbox-scroll
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  scrollContainer.addEventListener('mousedown', (e) => {
-    isDown = true;
+// Drag scroll functionality
+const dragScroll = {
+  isDown: false,
+  startX: 0,
+  scrollLeft: 0,
+  
+  init: () => {
+    if (!scrollContainer) return;
+    
+    scrollContainer.addEventListener('mousedown', dragScroll.handleMouseDown);
+    scrollContainer.addEventListener('mouseleave', dragScroll.handleMouseLeave);
+    scrollContainer.addEventListener('mouseup', dragScroll.handleMouseUp);
+    scrollContainer.addEventListener('mousemove', dragScroll.handleMouseMove);
+    
+    // Touch events for mobile
+    scrollContainer.addEventListener('touchstart', dragScroll.handleTouchStart, { passive: false });
+    scrollContainer.addEventListener('touchmove', dragScroll.handleTouchMove, { passive: false });
+    scrollContainer.addEventListener('touchend', dragScroll.handleTouchEnd);
+  },
+  
+  handleMouseDown: (e) => {
+    dragScroll.isDown = true;
     scrollContainer.classList.add('grabbing');
-    startX = e.pageX - scrollContainer.offsetLeft;
-    scrollLeft = scrollContainer.scrollLeft;
-  });
-
-  scrollContainer.addEventListener('mouseleave', () => {
-    isDown = false;
+    dragScroll.startX = e.pageX - scrollContainer.offsetLeft;
+    dragScroll.scrollLeft = scrollContainer.scrollLeft;
+  },
+  
+  handleMouseLeave: () => {
+    dragScroll.isDown = false;
     scrollContainer.classList.remove('grabbing');
-  });
-
-  scrollContainer.addEventListener('mouseup', () => {
-    isDown = false;
+  },
+  
+  handleMouseUp: () => {
+    dragScroll.isDown = false;
     scrollContainer.classList.remove('grabbing');
-  });
-
-  scrollContainer.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
+  },
+  
+  handleMouseMove: (e) => {
+    if (!dragScroll.isDown) return;
     e.preventDefault();
     const x = e.pageX - scrollContainer.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    scrollContainer.scrollLeft = scrollLeft - walk;
+    const walk = (x - dragScroll.startX) * 1.5;
+    scrollContainer.scrollLeft = dragScroll.scrollLeft - walk;
+  },
+  
+  handleTouchStart: (e) => {
+    dragScroll.isDown = true;
+    dragScroll.startX = e.touches[0].pageX - scrollContainer.offsetLeft;
+    dragScroll.scrollLeft = scrollContainer.scrollLeft;
+  },
+  
+  handleTouchMove: (e) => {
+    if (!dragScroll.isDown) return;
+    e.preventDefault();
+    const x = e.touches[0].pageX - scrollContainer.offsetLeft;
+    const walk = (x - dragScroll.startX) * 1.5;
+    scrollContainer.scrollLeft = dragScroll.scrollLeft - walk;
+  },
+  
+  handleTouchEnd: () => {
+    dragScroll.isDown = false;
+  }
+};
+
+// Initialize drag scroll
+if (scrollContainer) {
+  dragScroll.init();
+}
+
+// Header scroll effect
+let lastScrollY = window.scrollY;
+const header = document.querySelector('header');
+
+const handleScroll = utils.debounce(() => {
+  const currentScrollY = window.scrollY;
+  
+  if (currentScrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  
+  lastScrollY = currentScrollY;
+}, 10);
+
+window.addEventListener('scroll', handleScroll);
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   });
+});
+
+// Preload critical images
+const preloadImages = () => {
+  const criticalImages = [
+    'images/Shanghai_Substation/1.webp',
+    'images/Shanghai_Yanqing_Road_Market_Renovation/1.webp',
+    'images/Leifei_Hotel/1.webp'
+  ];
+  
+  criticalImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+};
+
+// Initialize preloading when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', preloadImages);
+} else {
+  preloadImages();
+}
 </script>
 
 </body>
