@@ -18,6 +18,14 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+.zh {
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; /* 中文统一字体 */
+  color: #111; 
+}
+.en {
+  font-family: 'Cormorant Garamond', serif; /* 英文统一字体 */
+  color: #111; 
+}
 
 /* Header */
 header {
@@ -41,7 +49,7 @@ nav a {
   color: #111;
   font-size: 1rem;
 }
-/* 保持导航横向排列 */
+
 nav {
   display: flex;
   gap: 30px; 
@@ -53,10 +61,8 @@ nav a span {
 }
 
 nav a .en { display: inline;
-  font-family: 'Cormorant Garamond', serif;
   font-size: 1rem; }
 nav a .zh { display: none; 
-  font-family: 'Noto Sans SC', sans-serif;
   font-size: 0.9rem;}
 
 
@@ -87,15 +93,25 @@ nav a .zh { display: none;
   display: block;
   margin-bottom: 10px;
 }
-.project-item h3 {
-  font-family: 'Cormorant Garamond', serif;
+/* 英文标题和地点 */
+.project-item.en h3 {
   font-weight: 300;
   font-size: 1rem;
 }
+/* 中文标题和地点 */
+.zh.project-item h3 {
+  font-size: 1rem;
+  font-weight: 310;
+}
 .project-location {
-  font-family: 'Cormorant Garamond', serif;
   font-weight: 300;
   font-size: 0.9rem;
+  color: #888;
+  margin-top: 4px;
+}
+.zh.project-location {
+  font-size: 0.9rem; 
+  font-weight: 300; 
   color: #888;
   margin-top: 4px;
 }
@@ -313,7 +329,6 @@ section.about p, section.contact p {
   display: block;  
   margin: 0 auto; 
 }
-
 
   </style>
 </head>
