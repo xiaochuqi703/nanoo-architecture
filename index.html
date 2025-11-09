@@ -277,16 +277,31 @@ section.about p, section.contact p {
 
 /* 响应式 */
 @media (max-width: 768px) {
-  header { flex-direction: column; align-items: flex-start; padding: 10px 15px; }
-  nav { display: none; flex-direction: column; position: absolute; top: 60px; right: 20px; background: #fff; padding: 10px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 999; }
-  nav a { margin: 10px 0; font-size: 1rem; }
-  nav.active { display: flex; }
-  .hamburger { display: block; }
-  .project-item img { width: 90%; max-width: 300px; }
-  .project-item h3 { font-size: 1rem; }
-  .project-list { gap: 20px; }
-  .founders { flex-direction: column; align-items: center; }
-  .founder { width: 100%; max-width: 300px; }
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    
+    /* 这里修改背景和边框相关样式 */
+     background: rgba(255, 255, 255, 0.8);
+    box-shadow: none; 
+    border: none; 
+    width:100px;
+    padding: 15px 20px; 
+    z-index: 999;
+  }
+  nav a {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+  nav.active {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
 }
 
 /* ===== 多语言切换设置 ===== */
@@ -707,11 +722,18 @@ Project3:{
   },
   };
 
-  
-function toggleMenu() {
-  const nav = document.getElementById('navbar');
-  nav.classList.toggle('active');
-}
+ const nav = document.getElementById('navbar');
+    const hamburger = document.querySelector('.hamburger');
+
+    function toggleMenu() {
+      nav.classList.toggle('active');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+        nav.classList.remove('active');
+      }
+    });
 
 document.addEventListener('DOMContentLoaded', () => {
   const btnEn = document.getElementById('lang-en');
