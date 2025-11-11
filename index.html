@@ -322,34 +322,38 @@ section.about p, section.contact p {
   }
 
   .lightbox-images-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 25px !important;
+    overflow: visible !important;
     min-width: 100% !important;
+    max-width: 100% !important;
     margin-left: 0 !important;
     margin-top: 40px !important;
-    max-width: 100% !important;
-    flex-direction: column !important;
-    height: auto !important; /* 改为auto，不要限制高度 */
-    align-items: center !important;
-    gap: 20px !important; /* 增加图片间距 */
-    overflow: visible !important; /* 确保所有内容可见 */
-    padding-bottom: 20px !important; /* 添加底部内边距 */
   }
+  
   
   .lightbox-images-container img {
-    /* 修改图片尺寸设置 */
+    width: 100% !important;
     height: auto !important;
-    width: 85vw !important; /* 使用视口宽度，而不是高度 */
-    max-height: none !important; /* 移除最大高度限制 */
-    max-width: 500px !important; /* 设置最大宽度 */
-    object-fit: contain !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
-  
+  /* 确保滚动容器不会限制内容 */
   .lightbox-scroll {
+    display: flex !important;
     flex-direction: column !important;
-    overflow-y: auto !important; /* 允许垂直滚动 */
-    height: 100vh !important; /* 使用全高 */
-    padding: 60px 20px 40px !important; /* 调整内边距 */
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
   }
-  
   /* 确保文字容器在移动端正常显示 */
   .lightbox-text-container {
     max-width: 100% !important;
@@ -960,36 +964,14 @@ function updateLightboxContent(project) {
     }, delay);
   });
 }
-// 在openLightbox函数中添加移动端特殊处理
-function openLightbox(projectId) {
-  currentProject = projects[projectId];
-  if (!currentProject) return console.error('Project not found:', projectId);
-  
-  lightbox.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  
-  updateLightboxContent(currentProject);
-  
-  // 移动端特殊处理：强制刷新布局
-  if (window.innerWidth <= 768) {
-    setTimeout(() => {
-      const imagesContainer = document.querySelector('.lightbox-images-container');
-      if (imagesContainer) {
-        // 强制重排
-        imagesContainer.style.display = 'none';
-        imagesContainer.offsetHeight; // 触发重排
-        imagesContainer.style.display = 'flex';
-        
-        // 确保所有图片可见
-        const images = imagesContainer.querySelectorAll('img');
-        images.forEach(img => {
-          img.style.visibility = 'visible';
-          img.style.opacity = '1';
-        });
-      }
-    }, 100);
+  // 打开 Lightbox
+  function openLightbox(projectId) {
+    currentProject = projects[projectId];
+    if (!currentProject) return console.error('Project not found:', projectId);
+    updateLightboxContent(currentProject);
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
-}
 
   // 关闭 Lightbox
   function closeLightbox() {
