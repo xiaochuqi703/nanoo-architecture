@@ -222,7 +222,6 @@ nav a .zh {
   min-width: 350px !important;
   max-width: 45vw !important;
   flex: 0 0 auto !important;
-  padding-left:20px !important;
 }
 
 .lightbox-images-container img {
@@ -321,35 +320,31 @@ section.about p, section.contact p {
     display: block;
   }
 
-  .lightbox-images-container img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    margin-bottom: 25px !important;
+.lightbox-text-container {
+    max-width: 100% !important; /* 小屏幕单列显示 */
+    columns: 1 !important;
   }
   
-  /* 确保图片容器不会隐藏任何内容 */
-  .lightbox-images-container {
-    display: block !important;
-    overflow: visible !important;
-    height: auto !important;
-  }
-  /* 确保滚动容器不会限制内容 */
-  .lightbox-scroll {
-    display: flex !important;
-    flex-direction: column !important;
-    overflow-y: auto !important;
-    height: auto !important;
-    min-height: 100vh !important;
-  }
-  /* 确保文字容器在移动端正常显示 */
-  .lightbox-text-container {
+ .lightbox-images-container {
+    min-width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 30px !important; /* 增加上下间距 */
     max-width: 100% !important;
-    columns: 1 !important;
-    height: auto !important; /* 不要限制高度 */
+    flex-direction: column !important;
+    height: auto !important;
+    align-items: center !important;
+    gap: 15px !important; /* 竖向排列时减小图片间距 */
+  }
+  
+ .lightbox-images-container img {
+    /* 竖向排列时：固定宽度，高度自适应 */
+    height: auto !important; /* 高度自适应 */
+    width: 70vh!important; /* 宽度一致 */
+    max-height: auto !important; /* 限制最大高度 */
+  }
+  
+  .lightbox-scroll {
+    flex-direction: column !important; /* 垂直布局 */
   }
 }
 
@@ -977,11 +972,27 @@ function updateLightboxContent(project) {
     if (e.key === 'Escape') closeLightbox();
   });
 
-// 简化 resize 处理
+// 改进的 resize 处理
 let resizeTimeout;
+let lastWidth = window.innerWidth;
+
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(updateTextContainerWidth, 150);
+  
+  const currentWidth = window.innerWidth;
+  const widthChange = Math.abs(currentWidth - lastWidth);
+  
+  // 只在宽度变化显著时重新计算，减少不必要的重排
+  if (widthChange > 30) {
+    resizeTimeout = setTimeout(() => {
+      updateTextContainerWidth();
+      lastWidth = currentWidth;
+      
+      // 关键优化：多次确认，确保分栏稳定
+      setTimeout(updateTextContainerWidth, 100);
+      setTimeout(updateTextContainerWidth, 300);
+    }, 50);
+  }
 });
   // =========================
   // 横向拖拽滚动
