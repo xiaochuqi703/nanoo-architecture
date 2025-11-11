@@ -321,31 +321,40 @@ section.about p, section.contact p {
     display: block;
   }
 
-.lightbox-text-container {
-    max-width: 100% !important; /* 小屏幕单列显示 */
-    columns: 1 !important;
-  }
-  
- .lightbox-images-container {
+  .lightbox-images-container {
     min-width: 100% !important;
     margin-left: 0 !important;
-    margin-top: 30px !important; /* 增加上下间距 */
+    margin-top: 40px !important;
     max-width: 100% !important;
     flex-direction: column !important;
-    height: auto !important;
+    height: auto !important; /* 改为auto，不要限制高度 */
     align-items: center !important;
-    gap: 15px !important; /* 竖向排列时减小图片间距 */
+    gap: 20px !important; /* 增加图片间距 */
+    overflow: visible !important; /* 确保所有内容可见 */
+    padding-bottom: 20px !important; /* 添加底部内边距 */
   }
   
- .lightbox-images-container img {
-    /* 竖向排列时：固定宽度，高度自适应 */
-    height: auto !important; /* 高度自适应 */
-    width: 70vh!important; /* 宽度一致 */
-    max-height: auto !important; /* 限制最大高度 */
+  .lightbox-images-container img {
+    /* 修改图片尺寸设置 */
+    height: auto !important;
+    width: 85vw !important; /* 使用视口宽度，而不是高度 */
+    max-height: none !important; /* 移除最大高度限制 */
+    max-width: 500px !important; /* 设置最大宽度 */
+    object-fit: contain !important;
   }
   
   .lightbox-scroll {
-    flex-direction: column !important; /* 垂直布局 */
+    flex-direction: column !important;
+    overflow-y: auto !important; /* 允许垂直滚动 */
+    height: 100vh !important; /* 使用全高 */
+    padding: 60px 20px 40px !important; /* 调整内边距 */
+  }
+  
+  /* 确保文字容器在移动端正常显示 */
+  .lightbox-text-container {
+    max-width: 100% !important;
+    columns: 1 !important;
+    height: auto !important; /* 不要限制高度 */
   }
 }
 
