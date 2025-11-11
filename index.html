@@ -222,6 +222,7 @@ nav a .zh {
   min-width: 350px !important;
   max-width: 45vw !important;
   flex: 0 0 auto !important;
+  padding-left:20px
 }
 
 .lightbox-images-container img {
@@ -972,27 +973,11 @@ function updateLightboxContent(project) {
     if (e.key === 'Escape') closeLightbox();
   });
 
-// 改进的 resize 处理
+// 简化 resize 处理
 let resizeTimeout;
-let lastWidth = window.innerWidth;
-
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
-  
-  const currentWidth = window.innerWidth;
-  const widthChange = Math.abs(currentWidth - lastWidth);
-  
-  // 只在宽度变化显著时重新计算，减少不必要的重排
-  if (widthChange > 30) {
-    resizeTimeout = setTimeout(() => {
-      updateTextContainerWidth();
-      lastWidth = currentWidth;
-      
-      // 关键优化：多次确认，确保分栏稳定
-      setTimeout(updateTextContainerWidth, 100);
-      setTimeout(updateTextContainerWidth, 300);
-    }, 50);
-  }
+  resizeTimeout = setTimeout(updateTextContainerWidth, 150);
 });
   // =========================
   // 横向拖拽滚动
