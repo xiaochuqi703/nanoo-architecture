@@ -960,14 +960,36 @@ function updateLightboxContent(project) {
     }, delay);
   });
 }
-  // 打开 Lightbox
-  function openLightbox(projectId) {
-    currentProject = projects[projectId];
-    if (!currentProject) return console.error('Project not found:', projectId);
-    updateLightboxContent(currentProject);
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+// 在openLightbox函数中添加移动端特殊处理
+function openLightbox(projectId) {
+  currentProject = projects[projectId];
+  if (!currentProject) return console.error('Project not found:', projectId);
+  
+  lightbox.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  
+  updateLightboxContent(currentProject);
+  
+  // 移动端特殊处理：强制刷新布局
+  if (window.innerWidth <= 768) {
+    setTimeout(() => {
+      const imagesContainer = document.querySelector('.lightbox-images-container');
+      if (imagesContainer) {
+        // 强制重排
+        imagesContainer.style.display = 'none';
+        imagesContainer.offsetHeight; // 触发重排
+        imagesContainer.style.display = 'flex';
+        
+        // 确保所有图片可见
+        const images = imagesContainer.querySelectorAll('img');
+        images.forEach(img => {
+          img.style.visibility = 'visible';
+          img.style.opacity = '1';
+        });
+      }
+    }, 100);
   }
+}
 
   // 关闭 Lightbox
   function closeLightbox() {
