@@ -79,7 +79,6 @@ nav a .zh {
 }
 
 
-/* 项目列表 - 保留所有字体样式 */
 .project-list {
   padding: 100px 20px 40px;
   display: flex;
@@ -103,12 +102,12 @@ nav a .zh {
 .project-item img:hover {
   transform: scale(1.01);
 }
-/* 英文标题字体样式 */
+
 .project-item.en h3 {
   font-weight: 300; /* 原始字重 */
   font-size: 1rem; /* 原始字体大小 */
 }
-/* 中文标题字体样式 */
+
 .zh.project-item h3 {
   font-size: 1rem; /* 原始字体大小 */
   font-weight: 300; /* 原始字重 */
@@ -330,35 +329,55 @@ section.about p, section.contact p {
     overflow-y: auto !important; /* 允许整个lightbox垂直滚动 */
   }
 
-.lightbox-text-container {
-    max-width: 85% !important; /* 小屏幕单列显示 */
+  .lightbox-text-container {
+    width: 90vw !important; /* 使用视口单位确保一致性 */
+    max-width: 90vw !important;
     columns: 1 !important;
     max-height: none !important;
     height: auto !important;
-    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    /* 强制重置所有可能影响宽度的属性 */
+    min-width: auto !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
   }
   
- .lightbox-images-container {
-    min-width: 100% !important;
-    margin-left: 0 !important;
-    margin-top: 30px !important; /* 增加上下间距 */
-    max-width: 100% !important;
+  .lightbox-images-container {
+    width: 90vw !important; /* 使用相同的视口单位 */
+    max-width: 90vw !important;
+    min-width: auto !important;
+    margin: 30px auto 0 !important;
     flex-direction: column !important;
     height: auto !important;
     align-items: center !important;
-    gap: 15px !important; /* 竖向排列时减小图片间距 */
+    gap: 15px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    /* 强制重置 */
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
   }
   
- .lightbox-images-container img {
-    height: auto !important; /* 高度自适应 */
-    width: 90%!important; /* 宽度一致 */
-    max-height: auto !important; /* 限制最大高度 */
+   .lightbox-images-container img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    display: block !important;
   }
   
-  .lightbox-scroll {
-    flex-direction: column !important; /* 垂直布局 */
+    .lightbox-scroll {
+    flex-direction: column !important;
+    padding: 80px 0 40px 0 !important; /* 移除左右内边距 */
+    align-items: center !important;
+    width: 100vw !important; /* 使用视口宽度 */
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  } 
   }
-}
+
 
 /* 多语言切换 - 保留所有字体样式 */
 .lang-toggle {
