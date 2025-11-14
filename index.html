@@ -13,22 +13,22 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Cormorant Garamond', serif; 
-  background: #fff;
-  color: #111;
-  overflow-x: hidden;
-}
-
 /* 多语言字体保留原始设置 */
 .zh {
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; /* 中文原始字体 */
+  font-family: "SimSun", serif; /* 中文原始字体 */
   color: #111; 
 }
 .en {
   font-family: 'Cormorant Garamond', serif; 
   color: #111; 
 }
+
+body {
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
 
 /* 头部导航 - 保留所有字体样式 */
 header {
@@ -148,103 +148,113 @@ nav a .zh {
 
 /* 确保布局稳定 */
 .lightbox-scroll {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0 !important;
-  padding: 40px 20px !important;
-  overflow-x: auto !important;
-  width: 100% !important;
-  contain: layout style paint !important;
-  will-change: transform; /* 优化渲染性能 */
+  display: flex ;
+  align-items: flex-start;
+  margin-top: 12vh;
+  gap: 0 ;
+  padding: 40px 20px ;
+  overflow-x: auto ;
+  width: 100% ;
+  contain: layout style paint ;
+  will-change: transform; 
 }
 
 .lightbox-text-container {
-  flex-shrink: 0 !important;
-  overflow: visible !important;
-  width: auto !important;
+  font-size:0.9rem;
+  flex-shrink: 0 ;
+  overflow: visible ;
+  width: auto ;
   max-width: calc(var(--required-columns) * var(--column-width) + (var(--required-columns) - 1) * var(--column-gap)) !important;
-  max-height: 70vh !important;
-  columns: var(--column-width) !important;
-  column-gap: var(--column-gap) !important;
-  column-fill: balance !important; 
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
+  max-height: 70vh ;
+  columns: var(--column-width) ;
+  column-gap: var(--column-gap) ;
+  column-fill: balance ; 
+  word-break: break-word ;
+  overflow-wrap: break-word ;
+  margin: 0 ;
+  padding: 0 ;
+  box-sizing: border-box ;
+  overflow: visible ;
 }
 
 .lightbox-text-content {
-  break-inside: avoid !important;
-  display: block !important;
-  width: 100% !important;
+  break-inside: avoid ;
+  display: block ;
+  width: 100% ;
 }
 
 
 .description p {
-  break-inside: avoid !important;
-  margin-bottom: 1em !important;
+  break-inside: auto ;
+  margin-bottom: 1em ;
 }
 
 
 .lightbox-text-container h2 {
-  break-inside: avoid !important;
-  break-after: avoid !important;
+  break-inside: aauto ;
+  break-after: avoid ;
 }
 
 .lightbox-text-container p {
-  break-inside: avoid !important;
-  break-after: avoid !important;
+  break-inside: auto ;
+  break-after: avoid ;
 }
 .lightbox-text-container .description {
-  break-inside: avoid !important; /* 单个标题/段落不跨栏 */
-  break-after: avoid !important; /* 不单独占一栏 */
+  break-inside: auto ; 
+  break-after: avoid ; 
 }
 
 /* 确保描述文字正确分栏 */
 .description {
   white-space: pre-line;
-  line-height: 1.6 !important;
-  font-family: sans-serif !important;
-  font-size: 0.9rem !important;
-  margin-top: 20px !important;
-  break-before: avoid !important;
-  break-inside: auto !important;
-  overflow-wrap: break-word !important;
+  line-height: 1.6 ;
+  margin-top: 20px ;
+  break-before: avoid ;
+  break-inside: auto ;
+  overflow-wrap: break-word ;
+  text-align: justify;
 }
 
 /* 简化图片容器样式 */
 .lightbox-images-container {
-  display: flex !important;
-  gap: 20px !important;
-  height: 70vh !important;
-  flex-shrink: 0 !important;
-  transition: none !important; /* 移除任何可能导致跳动的过渡效果 */
+  display: flex ;
+  gap: 20px ;
+  height: 70vh ;
+  flex-shrink: 0 ;
+  transition: none ; 
   margin-left: 0 !important; /* 完全由JS控制 */
-  min-width: 350px !important;
-  max-width: 45vw !important;
-  flex: 0 0 auto !important;
+  min-width: 350px ;
+  max-width: 45vw ;
+  flex: 0 0 auto ;
   padding-left:20px;
-  transition: opacity 0.3s ease;
+  padding
+  transition: opacity 0.3s ease
+}
+
+.lightbox-images-container::after {
+  content: '';
+  flex-shrink: 0;
+  width: 10px;
+  height: 1px;
 }
 
 .lightbox-images-container img {
-  height: 100% !important; /* 严格限制高度，与文字容器对齐 */
-  width: auto !important; /* 保持宽高比，不拉伸 */
-  object-fit: contain !important; /* 完整显示图片 */
-  border-radius: 6px !important;
+  height: 100% ; 
+  width: auto ; 
+  object-fit: contain ; 
+  border-radius:6px ;
 }
 
 /* 关闭按钮 - 保留原始样式 */
 .lightbox-close {
   position: fixed;
-  top: 0px;
-  right: 30px;
+  top: 20px;
+  right: 20px;
   color: #000;
-  font-size: 3rem; 
+  font-size: 2rem; 
   cursor: pointer;
-  z-index: 2100;
+  z-index: 1800;
+  font-family: Arial, sans-serif;
 }
 
 /* 关于/联系页 - 保留所有字体样式 */
@@ -301,6 +311,7 @@ section.about p, section.contact p {
 
 /* 响应式导航 - 保留字体样式 */
 @media (max-width: 768px) {
+
   nav {
     display: none;
     flex-direction: column;
@@ -325,12 +336,24 @@ section.about p, section.contact p {
     display: block;
   }
 
-    .lightbox {
-    overflow-y: auto !important; /* 允许整个lightbox垂直滚动 */
+     .lightbox {
+    overflow-y: auto !important; 
   }
 
+  .lightbox-scroll {
+    flex-direction: column !important;
+    padding: 80px 0 40px 0 !important; 
+    align-items: center !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important;
+    margin-top: 0 !important;
+    gap: 0 !important;
+  }
+  
   .lightbox-text-container {
-    width: 90vw !important; /* 使用视口单位确保一致性 */
+    width: 90vw !important; 
     max-width: 90vw !important;
     columns: 1 !important;
     max-height: none !important;
@@ -338,52 +361,59 @@ section.about p, section.contact p {
     margin: 0 auto !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    /* 强制重置所有可能影响宽度的属性 */
     min-width: auto !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
+    text-align: left !important;
+    columns: 1 !important;
+    column-fill: auto !important;
+    overflow: visible !important;
   }
   
   .lightbox-images-container {
-    width: 90vw !important; /* 使用相同的视口单位 */
+    width: 90vw !important;
     max-width: 90vw !important;
     min-width: auto !important;
-    margin: 30px auto 0 !important;
+    margin: 0  !important;
     flex-direction: column !important;
     height: auto !important;
     align-items: center !important;
     gap: 15px !important;
     padding: 0 !important;
     box-sizing: border-box !important;
-    /* 强制重置 */
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    max-width: 90vw !important;
+    margin-left: 0 !important;
   }
   
-   .lightbox-images-container img {
+  .lightbox-images-container img {
     width: 100% !important;
     height: auto !important;
     max-width: 100% !important;
     max-height: none !important;
     display: block !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
   }
-  
-    .lightbox-scroll {
-    flex-direction: column !important;
-    padding: 80px 0 40px 0 !important; /* 移除左右内边距 */
-    align-items: center !important;
-    width: 100vw !important; /* 使用视口宽度 */
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-  } 
+
+  /* 确保文字内容也居中 */
+  .lightbox-text-content {
+    text-align: left !important;
+    width: 100% !important;
   }
+}
 
 
 /* 多语言切换 - 保留所有字体样式 */
 .lang-toggle {
+  font-family: "SimSun", serif;
   position: fixed;
   top: 50px;
-  right: 30px;
+  right: 20px;
   z-index: 3000;
   font-size: 0.9rem; /* 原始大小 */
   color: #333; /* 原始颜色 */
@@ -392,11 +422,11 @@ section.about p, section.contact p {
   background: none;
   border: none;
   color: inherit;
-  font-family: 'Cormorant Garamond', serif; /* 原始字体 */
   font-size: 1rem; /* 原始大小 */
   cursor: pointer;
   padding: 0 6px;
   transition: color 0.3s;
+  font-family: inherit;
 }
 .lang-toggle button:hover {
   color: #888; /* 原始 hover 颜色 */
@@ -404,7 +434,8 @@ section.about p, section.contact p {
 .lang-toggle button + button::before {
   content: "|";
   color: #333; /* 原始分隔符颜色 */
-  margin: 0 6px;
+  position:relative;
+  left: -8px; 
 }
 
 /* 联系页细节 - 保留字体样式 */
@@ -417,18 +448,9 @@ section.about p, section.contact p {
   margin: 0;
 }
 section.contact h2 {
-  font-family: 'Cormorant Garamond', 'Noto Sans SC', serif; /* 原始字体 */
-  font-size: 1.5rem; /* 原始大小 */
+  font-size: 1.5rem; 
   margin-bottom: 20px;
   text-align: left;
-}
-
-/* 语言默认显示 - 保留原始逻辑 */
-.zh {
-  display: block;
-}
-.en {
-  display: none;
 }
 
   </style>
@@ -695,7 +717,12 @@ Project5:{
         'images/Shanghai_Yanqing_Road_Market_Renovation/3.webp',
         'images/Shanghai_Yanqing_Road_Market_Renovation/4.webp',
         'images/Shanghai_Yanqing_Road_Market_Renovation/5.webp',
-        'images/Shanghai_Yanqing_Road_Market_Renovation/6.webp'
+        'images/Shanghai_Yanqing_Road_Market_Renovation/6.webp',
+        'images/Shanghai_Yanqing_Road_Market_Renovation/7.webp',
+        'images/Shanghai_Yanqing_Road_Market_Renovation/8.webp',
+        'images/Shanghai_Yanqing_Road_Market_Renovation/9.webp',
+        'images/Shanghai_Yanqing_Road_Market_Renovation/10.webp',
+        'images/Shanghai_Yanqing_Road_Market_Renovation/11.webp'
       ],
       title: "LONG TABLE COMMUNITY LIVING ROOM",   // 项目名称
       title_zh: "长桌社区客厅",
@@ -743,7 +770,10 @@ Project6:{
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/2.webp',
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/3.webp',
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/4.webp',
-        'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/5.webp'
+        'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/5.webp',
+        'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/6.webp',
+        'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/7.webp',
+        'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/8.webp'
       ],
       title: "REWEAVING NETS AND LIGHTS",   // 项目名称
       title_zh: "重织渔灯",
@@ -757,7 +787,7 @@ Project6:{
         <p> Centered on the concepts of the “fishing net” and “fishing light,” the design explores the coexistence of old and new, nature and culture. The fishing net symbolizes connection—lightweight corridors “weave” through preserved stone walls and trees, linking renovated and new structures. The fishing light symbolizes hope and gathering—new buildings glow like lanterns over the lake, housing study, dining, and lodging functions by day and illuminating the water by night. Independent yet connected through corridors and courtyards, the buildings create open, fluid circulation. </p>
         <p> "Reweaving the net and Light"embodies both spatial renewal and cultural revival, weaving the memory of the fishing village into contemporary rural life along Shijiu Lake.</p>`,
       description_zh:`<p>项目位于石臼湖畔的骆山村，曾是以渔业为生的聚落。如今，部分民宅老旧破损、空间肌理模糊，但仍保留着石墙、树木与湖光交织的独特场景。</p>
-        <p>设计以“渔网”与“渔灯”为核心概念，从乡村原有的生活方式中提炼空间逻辑与更新方法，探索新旧共生、自然共融的场地重构路径。“渔网”象征连接，是渔文化最具代表性的符号。项目以此为灵感，拆除不具保留价值的旧建筑，保留原有石墙与树木，并以轻质连廊织补出原有的空间肌理，让新旧空间在交织中延续场地记忆。“渔灯”象征希望与聚合，是夜色中渔民生活的灵魂。新建建筑以此为意象，如漂浮在“网”上的光点。白天，它们承载研学、餐饮与住宿等复合功能；夜晚，灯光亮起，倒映湖面，形成“灯起渔乡”的诗意景象。各功能体块相对独立，由连廊与庭院串联，动线层层递进，营造开放而流动的体验。</p>
+        <p>设计以“渔网”与“渔灯”为核心概念:“渔网”象征连接。项目以此为灵感，拆除不具保留价值的旧建筑，保留原有石墙与树木，并以轻质连廊织补出原有的空间肌理，让新旧空间在交织中延续场地记忆; “渔灯”象征希望与聚合。新建建筑以此为意象，如漂浮在“网”上的光点。白天，它们承载研学、餐饮与住宿等复合功能；夜晚，灯光亮起，倒映湖面，形成“灯起渔乡”的诗意景象。各功能体块相对独立，由连廊与庭院串联，动线层层递进，营造开放而流动的体验。</p>
         <p>“重织渔光”既是空间的重构，也是文化的再生。设计通过“网”的连接与“灯”的点亮，将渔村记忆与当代生活重新编织，唤醒乡村的温度与活力，成为石臼湖畔振兴乡村的新注脚。</p>
         `},
 
@@ -768,7 +798,10 @@ Project2:{
         'images/Qingfeng_Road_Primary_School/3.webp',
         'images/Qingfeng_Road_Primary_School/4.webp',
         'images/Qingfeng_Road_Primary_School/5.webp',
-        'images/Qingfeng_Road_Primary_School/6.webp'
+        'images/Qingfeng_Road_Primary_School/6.webp',
+        'images/Qingfeng_Road_Primary_School/7.webp',
+        'images/Qingfeng_Road_Primary_School/8.webp',
+        'images/Qingfeng_Road_Primary_School/9.webp'
       ],
       title: "QINGFENG ROAD PRIMARY SCHOOL",   // 项目名称
       title_zh: "清风路小学",
@@ -795,7 +828,10 @@ Project3:{
         'images/Wuxi_Historical_Building_Interior_Renovation/4.webp',
         'images/Wuxi_Historical_Building_Interior_Renovation/5.webp',
         'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/7.webp'
+        'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/8.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/9.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/10.webp'
       ],
       title: "SLOW WEAVING, SLOW JOURNEY",   // 项目名称
       title_zh: "细织，慢来",
@@ -813,24 +849,16 @@ Project3:{
           </p>`
         },
   };
-// 简化 updateTextContainerWidth 函数，移除复杂的多次计算
 function updateTextContainerWidth() {
   const textEl = document.querySelector('.lightbox-text-container');
   const imagesEl = document.querySelector('.lightbox-images-container');
   
   if (!textEl || !imagesEl) return;
 
-  // 基础参数
+  // 固定参数
   const columnWidth = 300;
   const columnGap = 30;
   const textImageGap = 60;
-  
-  // 简化：直接计算一次
-  textEl.style.width = 'auto';
-  textEl.style.columns = 'auto';
-  
-  // 强制同步布局
-  textEl.offsetHeight;
   
   // 获取内容高度
   const contentEl = textEl.querySelector('.lightbox-text-content');
@@ -845,17 +873,16 @@ function updateTextContainerWidth() {
     requiredColumns = Math.ceil(contentHeight / containerHeight);
   }
   
-  // 考虑屏幕宽度限制
+  // 考虑屏幕限制
   const imageMinWidth = 350;
-  const scrollPadding = 40;
-  const availableWidth = window.innerWidth - imageMinWidth - textImageGap - scrollPadding;
+  const availableWidth = window.innerWidth - imageMinWidth - textImageGap - 40;
   const maxAllowedColumns = Math.max(1, Math.floor(availableWidth / (columnWidth + columnGap)));
   
   const finalColumns = Math.min(requiredColumns, maxAllowedColumns);
   const textWidth = finalColumns * columnWidth + (finalColumns - 1) * columnGap;
   const imageIndent = textWidth + textImageGap;
   
-  // 一次性应用所有样式
+  // 一次性应用样式
   document.documentElement.style.setProperty('--required-columns', finalColumns);
   textEl.style.width = `${textWidth}px`;
   imagesEl.style.marginLeft = `${imageIndent}px`;
@@ -975,21 +1002,30 @@ function updateLightboxContent(project) {
   scrollContainer.appendChild(imagesContainer);
 
   // 关键优化：更稳健的多次布局计算
-  const layoutDelays = [0, 50, 100, 200, 400, 600];
-  layoutDelays.forEach(delay => {
-    setTimeout(() => {
-      updateTextContainerWidth();
-    }, delay);
-  });
+setTimeout(updateTextContainerWidth, 0);
+setTimeout(updateTextContainerWidth, 50);
+setTimeout(updateTextContainerWidth, 150);
 }
   // 打开 Lightbox
-  function openLightbox(projectId) {
-    currentProject = projects[projectId];
-    if (!currentProject) return console.error('Project not found:', projectId);
-    updateLightboxContent(currentProject);
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+function openLightbox(projectId) {
+  currentProject = projects[projectId];
+  if (!currentProject) return console.error('Project not found:', projectId);
+  
+  // 先显示lightbox但隐藏内容
+  lightbox.style.display = 'flex';
+  const scrollContainer = document.getElementById('lightbox-scroll-container');
+  scrollContainer.style.opacity = '0'; // 关键：隐藏内容
+  
+  // 更新内容
+  updateLightboxContent(currentProject);
+  lightbox.className = 'lightbox ' + currentLang; 
+  document.body.style.overflow = 'hidden';
+  
+  // 延迟显示内容，让布局先稳定
+  setTimeout(() => {
+    scrollContainer.style.opacity = '1'; // 100ms后显示内容
+  }, 100);
+}
 
   // 关闭 Lightbox
   function closeLightbox() {
@@ -1106,13 +1142,8 @@ function debugLayout() {
 
   // 将调试函数暴露到全局，方便在控制台调用
   window.checkColumnLayout = checkColumnLayout;
-  
-  // 可选：在resize后自动检查分栏
-  // window.addEventListener('resize', () => {
-  //   setTimeout(checkColumnLayout, 300);
-  // });
-});
 
+});
 
 </script>
 
