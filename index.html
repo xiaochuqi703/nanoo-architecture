@@ -887,44 +887,6 @@ function updateTextContainerWidth() {
   imagesEl.style.marginLeft = `${imageIndent}px`;
 }
 
-// 简化 updateLightboxContent 函数中的布局调用
-function updateLightboxContent(project) {
-  const scrollContainer = document.getElementById('lightbox-scroll-container');
-  scrollContainer.innerHTML = '';
-
-  // 创建文字容器
-  const textContainer = document.createElement('div');
-  textContainer.className = 'lightbox-text-container';
-  
-  textContainer.innerHTML = `
-    <div class="lightbox-text-content">
-      <h2 class="project-title">${currentLang === 'zh' ? (project.title_zh || project.title) : (project.title || '')}</h2>
-      <p class="project-location">${currentLang === 'zh' ? (project.location_zh || project.location) : (project.location || '')}</p>
-      <p class="project-type">${currentLang === 'zh' ? (project.type_zh || project.type || '') : (project.type || '')}</p>
-      <p class="project-phase">${currentLang === 'zh' ? (project.phase_zh || project.phase || '') : (project.phase || '')}</p>
-      <p class="project-award">${currentLang === 'zh' ? (project.award_zh || project.award || '') : (project.award || '')}</p>
-      <div class="description">${currentLang === 'zh' ? (project.description_zh || project.description || '') : (project.description || '')}</div>
-    </div>
-  `;
-
-  // 创建图片容器
-  const imagesContainer = document.createElement('div');
-  imagesContainer.className = 'lightbox-images-container';
-  project.images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = currentLang === 'zh' ? project.title_zh : project.title;
-    imagesContainer.appendChild(img);
-  });
-
-  // 插入容器到DOM
-  scrollContainer.appendChild(textContainer);
-  scrollContainer.appendChild(imagesContainer);
-
-  // 简化：只计算两次，间隔合理的时间
-  setTimeout(updateTextContainerWidth, 0); // 立即计算
-  setTimeout(updateTextContainerWidth, 100); // 等图片可能加载了一些后再次计算
-}
 
  const nav = document.getElementById('navbar');
     const hamburger = document.querySelector('.hamburger');
@@ -963,18 +925,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-btnEn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  setLanguage('en');
-});
-btnZh.addEventListener('click', (e) => {
-  e.stopPropagation();
-  setLanguage('zh');
-});
-setLanguage(currentLang);
+  btnEn.addEventListener('click', () => setLanguage('en'));
+  btnZh.addEventListener('click', () => setLanguage('zh'));
+  setLanguage(currentLang);
 
 function updateLightboxContent(project) {
   scrollContainer.innerHTML = '';
+  scrollContainer.style.opacity = '0';
 
   // 创建文字容器
   const textContainer = document.createElement('div');
@@ -1032,11 +989,14 @@ function openLightbox(projectId) {
   }, 100);
 }
 
-  // 关闭 Lightbox
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-    document.body.style.overflow = '';
-  }
+// 关闭 Lightbox
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.style.display = 'none'; // 隐藏 Lightbox
+  lightbox.className = 'lightbox'; // <--- 关键：重置 class 为初始状态，移除 'zh' 或 'en'
+  document.body.style.overflow = '';
+  currentProject = null; // 重置当前项目状态
+}
 
   window.openLightbox = openLightbox;
   window.closeLightbox = closeLightbox;
