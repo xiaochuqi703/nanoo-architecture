@@ -963,9 +963,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  btnEn.addEventListener('click', () => setLanguage('en'));
-  btnZh.addEventListener('click', () => setLanguage('zh'));
-  setLanguage(currentLang);
+btnEn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setLanguage('en');
+});
+btnZh.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setLanguage('zh');
+});
+setLanguage(currentLang);
 
 function updateLightboxContent(project) {
   scrollContainer.innerHTML = '';
