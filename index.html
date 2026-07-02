@@ -46,20 +46,88 @@ header {
 header img {
   height: 40px;
 }
-nav {
-  display: flex;
-  gap: 30px; 
-  align-items: center;
-}
+
 nav a {
   margin-left: 30px;
   text-decoration: none;
   color: #111; /* 原始链接颜色 */
   font-size: 1rem; /* 原始链接字体大小 */
 }
-nav a span {
-  display: inline;  
+
+nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
+
+/* 统一每个导航项 */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* 所有主链接统一 */
+.nav-item > a {
+  text-decoration: none;
+  color: #111;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  display: none;
+    margin-top: 10px;
+  gap: 6px;
+  padding-left: 10px;
+  border-left: 1px solid #eee;
+
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(5px);
+
+  z-index: 2000;
+  flex-direction: column;
+  white-space: nowrap;
+  min-width: max-content;
+  pointer-events: auto;
+}
+
+.nav-projects {
+  position: relative;
+ display: inline-flex;
+ flex-direction: column;
+}
+.nav-projects:hover .dropdown,
+.nav-projects .dropdown:hover {
+  display: flex;
+}
+.nav-projects::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 12px;
+}
+/* dropdown style */
+.dropdown a {
+  font-size: 0.9rem;
+  color: #555;
+  text-decoration: none;
+}
+
+.dropdown a:hover {
+  color: #111;
+}
+
+
 nav a .en { 
   display: inline;
   font-size: 1rem; /* 英文导航字体大小 */
@@ -103,14 +171,14 @@ nav a .zh {
   transform: scale(1.01);
 }
 
-.project-item.en h3 {
-  font-weight: 300; /* 原始字重 */
-  font-size: 1rem; /* 原始字体大小 */
+.project-item .en h3 {
+  font-weight: 600; /* 原始字重 */
+  font-size: 1.25rem; /* 原始字体大小 */
 }
 
-.zh.project-item h3 {
-  font-size: 1rem; /* 原始字体大小 */
-  font-weight: 300; /* 原始字重 */
+.project-item .zh h3{
+  font-size: 1.25rem; /* 原始字体大小 */
+  font-weight: 600; /* 原始字重 */
 }
 /* 英文地点字体样式 */
 .project-location {
@@ -191,7 +259,7 @@ nav a .zh {
 
 
 .lightbox-text-container h2 {
-  break-inside: aauto ;
+  break-inside: auto ;
   break-after: avoid ;
 }
 
@@ -457,25 +525,47 @@ section.contact h2 {
 <body>
   <header>
     <img src="images/NANOO Architecture-Line Text-BK.png" alt="Logo" />
-    <nav id="navbar">
-<!-- Projects -->
-    <a href="#projects">
+<nav id="navbar">
+
+  <div class="nav-item nav-projects">
+    <a href="#projects" onclick="resetProjects()">
       <span class="en">Projects</span>
       <span class="zh">项目</span>
     </a>
 
-    <!-- About -->
+    <div class="dropdown">
+      <a href="#projects" onclick="showArchitecture()">
+        <span class="en">Architecture</span>
+        <span class="zh">建筑</span>
+      </a>
+
+      <a href="#projects" onclick="showInterior()">
+        <span class="en">Interior</span>
+        <span class="zh">室内</span>
+      </a>
+
+      <a href="#projects" onclick="showOther()">
+        <span class="en">Other</span>
+        <span class="zh">其他</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-item">
     <a href="#about">
       <span class="en">About</span>
       <span class="zh">关于</span>
     </a>
+  </div>
 
-    <!-- Contact -->
+  <div class="nav-item">
     <a href="#contact">
       <span class="en">Contact</span>
       <span class="zh">联系方式</span>
     </a>
-  </nav>
+  </div>
+
+</nav>
   <div class="lang-toggle">
     <button id="lang-en">EN</button>
     <button id="lang-zh">中</button>
@@ -486,92 +576,7 @@ section.contact h2 {
 </header>
 
 
-  <section id="projects" class="project-list">
-    <div class="project-item" data-project-id="Project4">
-      <img src="images/Shanghai_Substation/1.webp" alt="Project 4" loading="lazy">
-     <!-- 英文版 -->
-    <div class="en">
-      <h3>ALL-WEATHER PROMENADE</h3>
-      <p class="project-location">Shanghai, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>晴雨间廊</h3>
-      <p class="project-location">中国 上海</p>
-    </div>
-  </div>
-
-  
-    <div class="project-item" data-project-id="Project3">
-      <img src="images/Wuxi_Historical_Building_Interior_Renovation/1.webp" alt="Project 3"loading="lazy">
-    <!-- 英文版 -->
-    <div class="en">
-      <h3>SLOW WEAVING, SLOW JOURNEY</h3>
-      <p class="project-location">Wuxi, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>细织慢来</h3>
-      <p class="project-location">中国 无锡</p>      
-  </div>
-    </div>
-
-      <div class="project-item" data-project-id="Project5">
-      <img src="images/Shanghai_Yanqing_Road_Market_Renovation/1.webp" alt="Project 5"loading="lazy">
-    <!-- 英文版 -->
-    <div class="en">
-      <h3>LONG TABLE COMMUNITY LIVING ROOM </h3>
-      <p class="project-location">Shanghai, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>长桌社区客厅</h3>
-      <p class="project-location">中国 上海</p>
-    </div>  
-  </div>
-
-      <div class="project-item" data-project-id="Project6">
-      <img src="images/Nanjing_Luoshan_Village_Rural_Building_Renovation/1.webp" alt="Project 6"loading="lazy">
-    <!-- 英文版 -->
-    <div class="en">
-      <h3>REWEAVING NETS AND LIGHTS</h3>
-      <p class="project-location">Nanjing, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>重织渔灯</h3>
-      <p class="project-location">中国 南京</p>
-    </div>
-  </div>
-
-    <div class="project-item" data-project-id="Project1">
-      <img src="images/Leifei_Hotel/1.webp" alt="Project 1"loading="lazy">
-    <!-- 英文版 -->
-    <div class="en">
-      <h3>LEFEI HOTEL RENOVATION</h3>
-      <p class="project-location">Shanghai, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>乐非酒店立面改造</h3>
-      <p class="project-location">中国 上海</p>
-    </div>
-  </div>
-
-    <div class="project-item" data-project-id="Project2">
-      <img src="images/Qingfeng_Road_Primary_School/1.webp" alt="Project 2"loading="lazy">
-    <!-- 英文版 -->
-    <div class="en">
-      <h3>QINGFENG ROAD PRIMARY SCHOOL</h3>
-      <p class="project-location">Shenzhen, China</p>
-    </div>
-    <!-- 中文版 -->
-    <div class="zh">
-      <h3>清风路小学</h3>
-      <p class="project-location">中国 深圳</p>
-    </div>
-  </div>
-  </section>
+  <section id="projects" class="project-list"></section>
 
   <section id="about" class="about">
        <!-- 英文版 -->
@@ -693,13 +698,16 @@ section.contact h2 {
       ],
       title: "ALL-WEATHER PROMENADE",   // 项目名称
       title_zh: "晴雨间廊",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:true,
       location: "Shanghai, China",      // 项目地点
-      location_zh: "中国 · 上海",
+      location_zh: "中国 上海",
       type: "Type:Facade Design",       // 项目类型
       type_zh: "项目类型：立面设计",
       phase: "Phase: Design Development",  // 项目阶段
       phase_zh: "阶段：深化设计",
-      Award: "Award:2025 Shanghai Infrastructure Design Award- First Prize 🥇",
+      award: "Award:2025 Shanghai Infrastructure Design Award- First Prize 🥇",
       award_zh: "奖项：2025上海市基础设施设计竞赛一等奖🥇",
       description: `<p>The “All-Weather Promenade” Substation embodies the concept of sharing and integration, exploring a new relationship between urban infrastructure and public life. The design optimizes the originally enclosed 110kV substation by adjusting the building and driveway layout to open the site edges for public access and activity.</p>
         <p> While ensuring equipment clearance and operational safety, the building volume is reduced, and the eaves extend to form a covered promenade offering both shade and shelter. Along the riverside walkway, the corridor integrates rest stops, viewing platforms, and fitness facilities, becoming an active public node. The unified roof and façade clad in blue aluminum panels blend naturally with the surrounding landscape. Photovoltaic panels on the roof power the supporting amenities, creating a sustainable, self-sufficient energy loop. </p>
@@ -725,8 +733,11 @@ Project5:{
       ],
       title: "LONG TABLE COMMUNITY LIVING ROOM",   // 项目名称
       title_zh: "长桌社区客厅",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:true,
       location: "Shanghai, China",      // 项目地点
-      location_zh: "中国 · 上海",
+      location_zh: "中国 上海",
       type: "Type:Interior Renovation and Operation",  // 项目类型
       type_zh: "项目类型：室内更新及运营策划",
       phase: "Phase: Concept",  // 项目阶段
@@ -750,8 +761,11 @@ Project1:{
       ],
       title: "LEFEI HOTEL RENOVATION",   // 项目名称
       title_zh: "乐非酒店立面改造",
+       category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:true,
       location: "Shanghai, China",      // 项目地点
-      location_zh: "中国 · 上海",
+      location_zh: "中国 上海",
       type: "Type:Facade Renovation",  // 项目类型
       type_zh: "项目类型：外立面改造",
       phase: "Phase: In Construction",  // 项目阶段
@@ -763,7 +777,124 @@ Project1:{
       <p>结合周边建筑风貌，外立面以“海派装饰艺术”（Shanghai-style Art Deco）为设计语言进行重塑，并新增排烟窗，以兼顾功能与美观。设计尽可能保留原有石材立面，减少改动，使整体形象既协调又优雅。西南角酒吧区域采用可折叠门设计，必要时可完全打开，使室内酒吧与室外座区连通。与街对面的餐车共同营造出活力十足的微型商业街氛围。</p>
   `},
 
-Project6:{
+
+Project3:{
+      images: [
+        'images/Wuxi_Historical_Building_Interior_Renovation/1.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/2.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/3.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/4.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/5.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/8.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/9.webp',
+        'images/Wuxi_Historical_Building_Interior_Renovation/10.webp'
+      ],
+      title: "SLOW WEAVING, SLOW JOURNEY",   // 项目名称
+      title_zh: "细织，慢来",
+      category:"interior", // 项目类别
+      category_zh:"室内", 
+      featured:true,
+      location: "Wuxi, China",      // 项目地点
+      location_zh: "中国 无锡",
+      type: "Type:Interior Renovation",  // 项目类型
+      type_zh: "项目类型：历史保护建筑室内更新",
+      phase: "Phase: Concept",  // 项目阶段
+      phase_zh: "阶段：概念设计",
+      description: `<p>The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. </p>
+      <p>Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles.
+      </p>`,
+        description_zh:`<p>设计概念源自张氏嘉乐堂原房主庆丰纱厂员工的历史背景，通过织物的透明度和流动性，我们将张氏嘉乐堂打造成一个集以纺织为主的传统民俗艺术体验工作坊、共享办公与茶舍为一体的复合型空间。</p>
+          <p>柔软的织物作为空间创造的媒介，在老建筑的内部包裹出可停、可游、可展、可憩的新场景体验。我们将建筑原本封闭的城市界面打开，在场地内部构建出一个可全天候共享的开放型艺术工作坊空间，作为城市公共空间的延续。织物不仅是物理媒介，更象征人与空间、历史与文化的联系，营造出慢节奏、温暖的空间体验，让访客在织物的包裹中感受时间与文化的沉淀。
+          </p>`
+        },
+
+        Project7: {
+      images: [
+        'images/The_Mist_Passage/1.webp',
+        'images/The_Mist_Passage/2.webp',
+        'images/The_Mist_Passage/3.webp',
+        'images/The_Mist_Passage/4.webp',
+        'images/The_Mist_Passage/5.webp',
+        'images/The_Mist_Passage/6.webp'
+      ],
+      title: "THE MIST PASSAGE",   // 项目名称
+      title_zh: "雾径之所",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:true,
+      location: "Yakushima, Japan",      // 项目地点
+      location_zh: "日本 屋久岛",
+      type: "Type:Architecture",       // 项目类型
+      type_zh: "项目类型：建筑设计",
+      phase: "Phase: Schematic Design",  // 项目阶段
+      phase_zh: "阶段：初步设计",
+      description: `<p>Set between forest and meadow, the building follows the natural terrain and gently unfolds along the slope. Two staggered semi-cylindrical volumes are unified by a low mono-pitched roof, allowing the architecture to sit lightly on the ground like mist at the forest edge.</p>
+        <p> A north–south circulation spine connects open grassland to dense woodland. The southern entrance marks a soft threshold from everyday life into nature. Living spaces are placed below, bedrooms above. An infinity pool opens to southern views, while northern bathing spaces immerse users in the forest.</p>
+        <p>Spaces transition from open to intimate, from landscape to bodily experience. The building acts as a quiet threshold between mountain, rain, and forest.
+      </p>`,
+        description_zh: `<p>建筑位于森林与草地之间，顺应自然地形并沿坡地缓缓展开。两个错动的半圆柱体量由一片低矮的单坡屋顶统一，使建筑轻柔地贴合地面，如同森林边缘的薄雾。</p>
+        <p>一条南北向的动线连接开敞草地与密林深处。南侧入口构成从日常进入自然的柔和过渡。下层布置起居空间，上层为卧室。南向无边泳池面向远景，北侧泡池则将身体引入森林之中。</p>
+        <p>空间由开敞逐渐转向私密，由景观过渡至身体体验。建筑作为山、雨与森林之间的静谧界面存在。 </p>`},
+
+      Project9: {
+      images: [
+        'images/The_Woven_Cove/1.webp',
+        'images/The_Woven_Cove/2.webp',
+        'images/The_Woven_Cove/3.webp',
+        'images/The_Woven_Cove/4.webp',
+        'images/The_Woven_Cove/5.webp',
+        'images/The_Woven_Cove/6.webp',
+        'images/The_Woven_Cove/7.webp'
+      ],
+      title: "THE WOVEN COVE",   // 项目名称
+      title_zh: "织湾",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:true,
+      location: "Podgorica, Montenegro",      // 项目地点
+      location_zh: "黑山 波德戈理察",
+      type: "Type:Architecture",       // 项目类型
+      type_zh: "项目类型：建筑设计",
+      phase: "Phase: Schematic Design",  // 项目阶段
+      phase_zh: "阶段：初步设计",
+      description: `<p>"The Woven Cove" is an inclusive community destination where healthcare and social life coexist within a shared civic framework. Named after its woven faux-wood louvre system, the building uses shading and natural texture to create a warm, human-scaled identity while softening the institutional character of the health centre.</p>
+        <p> An L-shaped layout provides separate entrances for the community center and health centre, ensuring clear circulation and accessibility. The health centre occupies the lower floors, while community spaces, a café, and a multipurpose hall open onto landscaped terraces, fostering wellbeing, social interaction, and a sense of belonging.</p>
+      </p>`,
+        description_zh: `<p>织湾是一处融合医疗服务与社区生活的综合公共空间，在统一的公共框架下实现健康与社交功能的共存。​</p>
+        <p>项目名称源于建筑外立面的仿木编织格栅系统，通过遮阳构件与自然材质肌理，塑造出温暖、亲切、富有人性尺度的建筑形象，弱化了医疗建筑常见的机构感。​</p>
+        <p>建筑采用 L 形布局，社区中心与健康中心分别设置独立入口，保证流线清晰、使用便捷。健康中心布置于下部楼层，社区活动空间、咖啡厅及多功能厅则与景观露台相连，共同营造促进健康、鼓励交流并增强社区归属感的共享环境。</p>
+        </p>`},
+
+      Project8: {
+      images: [
+        'images/Co-Shading/1.webp',
+        'images/Co-Shading/2.webp',
+        'images/Co-Shading/3.webp',
+        'images/Co-Shading/4.webp',
+        'images/Co-Shading/5.webp'
+      ],
+      title: "CO-SHADING",   // 项目名称
+      title_zh: "共荫",
+      category:"other", // 项目类别
+      category_zh:"其他", 
+      featured:true,
+      location: "Jinhua, China",      // 项目地点
+      location_zh: "中国 金华",
+      type: "Type:Landscape",       // 项目类型
+      type_zh: "项目类型：景观设计",
+      phase: "Phase: Schematic Design",  // 项目阶段
+      phase_zh: "阶段：初步设计",
+      description: `<p>The design preserves all existing mature trees and introduces lightweight shading structures between their canopies, allowing the natural tree crowns and artificial roofs to interweave into a continuous sheltered environment. Trees and built elements are carefully arranged to complement one another, together defining a clear spatial boundary and a comfortable human scale.</p>
+        <p> Rather than separating users by age or physical ability, the design embraces diversity through a continuous range of spatial scales and flexible ways of occupying the space. It accommodates different physical needs and rhythms of use, creating an inclusive environment for people of all ages. Beneath this shared canopy of shade, everyone gathers to enjoy a place of warmth, comfort, and belonging.</p>
+      </p>`,
+        description_zh: `<p>设计​保留​了​所有​景观​乔木，​并​在​树冠间​增设​遮阳​设施，​使​自然​树冠​与​人工屋檐​交织​形成​连续​的​遮蔽​空间。​树木​与​构筑物​相互​退​让​融合，​共同​界定​出​清晰​的​遮蔽​范围​与​空间​尺度。​</p>
+        <p>设计​摒弃​年​龄​与​身体​条件​的​分区，​通过​连续​的​尺度​变化​与​开放​的​停留​方式，​包容​不同​身体​状态​与​使用​节奏，​满足​多样​人群​的​共同​使用。​全​年​龄​使用者​汇聚​在​这​片​共生荫​影下，​共​享​着​一处​属于​每​个​人​的​温暖​与​安宁。</p>
+        </p>`},
+
+  
+        Project6:{
       images: [
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/1.webp',
         'images/Nanjing_Luoshan_Village_Rural_Building_Renovation/2.webp',
@@ -776,8 +907,11 @@ Project6:{
       ],
       title: "REWEAVING NETS AND LIGHTS",   // 项目名称
       title_zh: "重织渔灯",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:false,
       location: "Nanjing, China",      // 项目地点
-      location_zh: "中国 · 南京",
+      location_zh: "中国 南京",
       type: "Type:Rural Building Renovation",  // 项目类型
       type_zh: "项目类型：乡村建筑改造",
       phase: "Phase: Concept",  // 项目阶段
@@ -804,8 +938,11 @@ Project2:{
       ],
       title: "QINGFENG ROAD PRIMARY SCHOOL",   // 项目名称
       title_zh: "清风路小学",
+      category:"architecture", // 项目类别
+      category_zh:"建筑", 
+      featured:false,
       location: "Shenzhen, China",      // 项目地点
-      location_zh: "中国 · 深圳",
+      location_zh: "中国 深圳",
       type: "Type: Institute",  // 项目类型
       type_zh: "项目类型：教育建筑",
       phase: "Phase: Schematic Design",  // 项目阶段
@@ -818,35 +955,6 @@ Project2:{
       <p>本提案以传统农耕文明的"阡陌"为意象，构建纵横交织的现代教育空间网络。设计突破传统校园的封闭模式，通过三大核心理念重构学习环境：一是以"偏转活力场"为空间骨架，通过操场布局实现教学区与社区活动区的有机划分；二是建立"立体穿行路径系统"，通过三层操场平台、二层艺廊和首层架空轴线形成三维互联的交流网络；三是打造"垂直活动聚落"，围绕主要教学空间植入连廊与屋顶平台，使学习与交往自然融合。</p>
       <p>这一概念既传承了传统书院的空间意境，又以现代设计手法创造出开放共享、动静相宜的新型教育场所，让知识如阡陌间的流水般自然渗透、自由生长。
       </p>`},
-
-Project3:{
-      images: [
-        'images/Wuxi_Historical_Building_Interior_Renovation/1.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/2.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/3.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/4.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/5.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/6.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/7.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/8.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/9.webp',
-        'images/Wuxi_Historical_Building_Interior_Renovation/10.webp'
-      ],
-      title: "SLOW WEAVING, SLOW JOURNEY",   // 项目名称
-      title_zh: "细织，慢来",
-      location: "Wuxi, China",      // 项目地点
-      location_zh: "中国 · 无锡",
-      type: "Type:Interior Renovation",  // 项目类型
-      type_zh: "项目类型：历史保护建筑室内更新",
-      phase: "Phase: Concept",  // 项目阶段
-      phase_zh: "阶段：概念设计",
-      description: `<p>The design concept originates from the historical background of the Zhangshi Jialetang’s former owner, the worker of Qingfeng textile factory. By leveraging the transparency and fluidity of textiles, we transform the building into a multifunctional space integrating a traditional folk art experience workshop themed on textile, co-working areas, and a tea house. </p>
-      <p>Soft textiles serve as the medium for spatial creation, enveloping the interior of the historic building to craft new experiential scenes for staying, exploring, displaying, and resting. We open up the originally enclosed urban facade, creating a 24/7 shared open art workshop space within the site, extending it as a continuation of the city’s public space. Textiles are not only physical mediums but also symbolize the connection between people and space, history and culture, fostering a slow-paced, warm spatial experience that allows visitors to feel the gentle touch of time and cultural heritage within the embrace of textiles.
-      </p>`,
-        description_zh:`<p>设计概念源自张氏嘉乐堂原房主庆丰纱厂员工的历史背景，通过织物的透明度和流动性，我们将张氏嘉乐堂打造成一个集以纺织为主的传统民俗艺术体验工作坊、共享办公与茶舍为一体的复合型空间。</p>
-          <p>柔软的织物作为空间创造的媒介，在老建筑的内部包裹出可停、可游、可展、可憩的新场景体验。我们将建筑原本封闭的城市界面打开，在场地内部构建出一个可全天候共享的开放型艺术工作坊空间，作为城市公共空间的延续。织物不仅是物理媒介，更象征人与空间、历史与文化的联系，营造出慢节奏、温暖的空间体验，让访客在织物的包裹中感受时间与文化的沉淀。
-          </p>`
-        },
   };
 function updateTextContainerWidth() {
   const textEl = document.querySelector('.lightbox-text-container');
@@ -901,8 +1009,51 @@ function updateTextContainerWidth() {
       }
     });
 
+    function renderProjects(list) {
+  const container = document.querySelector(".project-list");
+  container.innerHTML = "";
+
+
+  
+  list.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "project-item";
+    div.setAttribute("data-project-id", p.id);
+
+div.innerHTML = `
+  <img src="${p.images[0]}" loading="lazy">
+
+  <div class="en">
+    <h3>${p.title}</h3>
+    <p class="project-location">${p.location}</p>
+  </div>
+
+  <div class="zh">
+    <h3>${p.title_zh || p.title}</h3>
+    <p class="project-location">${p.location_zh || p.location}</p>
+  </div>
+`;
+
+    container.appendChild(div);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  const btnEn = document.getElementById('lang-en');
+    const CATEGORY = {
+    ARCH: "architecture",
+    INT: "interior",
+    OTHER:"other"
+  };
+
+  const container = document.querySelector(".project-list");
+
+container.addEventListener("click", (e) => {
+  const item = e.target.closest(".project-item");
+  if (!item) return;
+
+  openLightbox(item.dataset.projectId);
+});
+    const btnEn = document.getElementById('lang-en');
   const btnZh = document.getElementById('lang-zh');
   const scrollContainer = document.getElementById('lightbox-scroll-container');
   const lightbox = document.getElementById('lightbox');
@@ -910,8 +1061,54 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLang = localStorage.getItem('lang') || 'zh';
   let currentProject = null;
 
+function renderFeaturedProjects() {
+  const featured = Object.entries(projects)
+    .map(([id, p]) => ({ ...p, id }))
+    .filter(p => p.featured);
+
+  renderProjects(featured);
+}
+  renderFeaturedProjects();
   // 拖动滚动状态
   let isDown = false, startX, scrollLeft;
+
+  function resetProjects() {
+  renderFeaturedProjects();
+  setLanguage(currentLang); 
+  window.location.hash = "projects";
+}
+
+window.resetProjects = resetProjects;
+
+function showArchitecture() {
+  const filtered = Object.entries(projects)
+    .map(([id, p]) => ({ ...p, id }))
+    .filter(p => p.category ===CATEGORY.ARCH);
+
+  renderProjects(filtered);
+  setLanguage(currentLang); 
+}
+
+function showInterior() {
+  const filtered = Object.entries(projects)
+    .map(([id, p]) => ({ ...p, id }))
+    .filter(p => p.category ===CATEGORY.INT);
+
+  renderProjects(filtered);
+  setLanguage(currentLang); 
+}
+
+function showOther() {
+  const filtered = Object.entries(projects)
+    .map(([id, p]) => ({ ...p, id }))
+    .filter(p => p.category ===CATEGORY.OTHER);
+
+  renderProjects(filtered);
+  setLanguage(currentLang); 
+}
+window.showArchitecture = showArchitecture;
+window.showInterior = showInterior;
+window.showOther = showOther;
 
   // 设置语言显示
   function setLanguage(lang) {
@@ -1046,11 +1243,7 @@ window.addEventListener('resize', () => {
     }
   });
 
-  document.querySelectorAll('.project-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const projectId = item.dataset.projectId;
-      openLightbox(projectId);
-    });
+
   });
 
   // 调试布局问题的函数
@@ -1107,8 +1300,6 @@ function debugLayout() {
 
   // 将调试函数暴露到全局，方便在控制台调用
   window.checkColumnLayout = checkColumnLayout;
-
-});
 
 </script>
 
